@@ -1,0 +1,83 @@
+# Project:   shiny-mi-pca-plot
+# Objective: user interface
+# Author:    Edoardo Costantini
+# Created:   2022-07-28
+# Modified:  2022-07-28
+
+# Packages ---------------------------------------------------------------------
+
+  library(shiny)
+  library(ggplot2)
+  library(shinyWidgets)
+  library(dplyr)
+
+  # Preapre data -----------------------------------------------------------------
+
+  # Data to plot
+  gg_shape <- readRDS("8469421_main_gg_shape.rds")
+
+  # Change names of factors for plot
+  levels(gg_shape$method) <- c("MI-PCR-ALL", "MI-PCR-ALL (oracle)",
+                               "MI-PCR-AUX", "MI-PCR-VBV",
+                               "MI-QP", "MI-OR", "MI-MI",
+                               "CC", "OG")
+
+  gg_shape$npc <- as.numeric(as.character(gg_shape$npc))
+
+  # Graph structure
+  plot_x_axis <- "K"
+  moderator   <- "npc"
+  grid_x_axis <- "method"
+  grid_y_axis <- "pj"
+
+# Ui
+ui <- fluidPage(
+
+  fluidRow(
+    column(4,
+           h4("Data generation factors"),
+           selectInput("lv",
+                       "Latent structure",
+                       choices = unique(gg_shape$lv),
+                       selected = TRUE),
+           checkboxGroupInput("K",
+                              "Discrete levels",
+                              inline = TRUE,
+                              choices = levels(gg_shape$K),
+                              selected = levels(gg_shape$K)),
+           checkboxGroupInput("pj",
+                              "Proportion of noise variables",
+                              inline = TRUE,
+                              choices = unique(gg_shape$pj),
+                              selected = unique(gg_shape$pj)),
+    ),
+    column(4,
+           h4("Desired outcome to show"),
+           selectInput("par",
+                       "Parameter",
+                       choices = levels(gg_shape$par)),
+           selectInput("plot_y_axis",
+                       "Outcome measure",
+                       choices = c("bias", "CIC", "CIW", "mcsd")),
+    ),
+    column(4,
+           h4("Missing data treatments"),
+           checkboxGroupInput("method",
+                              "Methods",
+                              choices = levels(gg_shape$method),
+                              selected = levels(gg_shape$method)[c(1, 3, 4, 5)],
+                              inline = TRUE),
+           shinyWidgets::sliderTextInput(inputId = "npc",
+                                         label = "Number of principal components",
+                                         hide_min_max = TRUE,
+                                         choices = sort(unique(gg_shape$npc)),
+                                         selected = range(gg_shape$npc),
+                                         grid = TRUE),
+    )
+  ),
+
+  hr(),
+
+  plotOutput('plot'),
+
+)

@@ -1,0 +1,8 @@
+# Ignore .idea folder
+.idea/
+
+# Ignore published shiny app
+*.dcf
+
+# Ignore raw rds
+*.rds
