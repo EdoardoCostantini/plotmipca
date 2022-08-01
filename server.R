@@ -39,7 +39,7 @@ server <- function(input, output, session) {
       updateCheckboxGroupInput(session,
                                inputId = "method",
                                label = "Methods",
-                               selected = levels(gg_shape$method)[3]
+                               selected = levels(gg_shape$method)[4]
       )
     }
   })
