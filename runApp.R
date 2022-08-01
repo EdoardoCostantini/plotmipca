@@ -2,7 +2,7 @@
 # Objective: script to load data and run app
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-07-28
+# Modified:  2022-08-01
 
 # Packages ---------------------------------------------------------------------
 
@@ -10,6 +10,7 @@
   library(ggplot2)
   library(shinyWidgets)
   library(dplyr)
+  library(shinybrowser) # web browser information in Shiny apps
 
 # Preapre data -----------------------------------------------------------------
 

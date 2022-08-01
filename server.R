@@ -2,7 +2,7 @@
 # Objective: back end
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-07-28
+# Modified:  2022-08-01
 
   # Packages ---------------------------------------------------------------------
 
@@ -10,6 +10,7 @@
   library(ggplot2)
   library(shinyWidgets)
   library(dplyr)
+  library(shinybrowser) # web browser information in Shiny apps
 
   # Preapre data -----------------------------------------------------------------
 
@@ -32,7 +33,19 @@
 
 server <- function(input, output, session) {
 
-  output$plot <- renderPlot(res = 96, height = 1000, {
+  observe({
+    # Width of page
+    if(shinybrowser::get_width() < 768){
+      updateCheckboxGroupInput(session,
+                               inputId = "method",
+                               label = "Methods",
+                               selected = levels(gg_shape$method)[3]
+      )
+    }
+  })
+
+  output$plot <- renderPlot(res = 96, height = 500,
+  {
     gg_shape %>%
       filter(par == input$par,
              lv == input$lv,

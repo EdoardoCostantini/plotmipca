@@ -10,6 +10,7 @@
   library(ggplot2)
   library(shinyWidgets)
   library(dplyr)
+  library(shinybrowser) # web browser information in Shiny apps
 
   # Preapre data -----------------------------------------------------------------
 
@@ -75,6 +76,9 @@ ui <- fluidPage(
                                          grid = TRUE),
     )
   ),
+
+  # Silent extraction of size
+  shinybrowser::detect(),
 
   hr(),
 
