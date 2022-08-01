@@ -63,8 +63,6 @@ server <- function(input, output, session) {
       scale_fill_manual(values = gray.colors(length(unique(gg_shape$npc)),
                                              start = .7,
                                              end = .1)) +
-      # geom_hline(aes(yintercept = 10),
-      #            size = .25) +
       facet_grid(reformulate(grid_x_axis, grid_y_axis),
                  labeller = labeller(.rows = label_both, .cols = label_value),
                  scales = "free",

@@ -32,8 +32,8 @@
   grid_y_axis <- "pj"
 
 # Ui
-ui <- fluidPage(
 
+ui <- fluidPage(
   fluidRow(
     column(4,
            h4("Data generation factors"),
@@ -83,5 +83,4 @@ ui <- fluidPage(
   hr(),
 
   plotOutput('plot'),
-
 )
