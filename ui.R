@@ -2,7 +2,7 @@
 # Objective: user interface
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-07-28
+# Modified:  2022-08-01
 
 # Packages ---------------------------------------------------------------------
 
@@ -44,12 +44,12 @@ ui <- fluidPage(
                               "Discrete levels",
                               inline = TRUE,
                               choices = levels(gg_shape$K),
-                              selected = levels(gg_shape$K)),
+                              selected = levels(gg_shape$K)[c(1, 3, 5)]),
            checkboxGroupInput("pj",
                               "Proportion of noise variables",
                               inline = TRUE,
                               choices = unique(gg_shape$pj),
-                              selected = unique(gg_shape$pj)),
+                              selected = unique(gg_shape$pj)[c(1, 4)]),
     ),
     column(4,
            h4("Desired outcome to show"),
