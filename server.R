@@ -2,44 +2,50 @@
 # Objective: back end
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-08-01
+# Modified:  2022-09-12
 
 server <- function(input, output, session) {
-
   observe({
-    # Width of page
-    if(shinybrowser::get_width() < 768){
+    # Width of the page
+    if (shinybrowser::get_width() < 768) {
       updateCheckboxGroupInput(session,
-                               inputId = "method",
-                               label = "Methods",
-                               selected = levels(gg_shape$method)[4]
+        inputId = "method",
+        label = "Methods",
+        selected = levels(gg_shape$method)[4]
       )
     }
   })
 
-  output$plot <- renderPlot(res = 96, height = 500,
-  {
+  output$plot <- renderPlot(res = 96, height = 500, {
     gg_shape %>%
-      filter(par == input$par,
-             lv == input$lv,
-             method %in% input$method,
-             npc <= input$npc[2],
-             npc >= input$npc[1],
-             K %in% input$K,
-             pj %in% input$pj) %>%
-      mutate(npc = factor(npc))  %>%
-      ggplot(aes_string(x = plot_x_axis,
-                        y = input$plot_y_axis,
-                        fill = "npc")) +
-      geom_bar(stat = "identity",
-               position = "dodge") +
+      filter(
+        par == input$par,
+        lv == input$lv,
+        method %in% input$method,
+        npc <= input$npc[2],
+        npc >= input$npc[1],
+        K %in% input$K,
+        pj %in% input$pj
+      ) %>%
+      mutate(npc = factor(npc)) %>%
+      ggplot(aes_string(
+        x = plot_x_axis,
+        y = input$plot_y_axis,
+        fill = "npc"
+      )) +
+      geom_bar(
+        stat = "identity",
+        position = "dodge"
+      ) +
       scale_fill_manual(values = gray.colors(length(unique(gg_shape$npc)),
-                                             start = .7,
-                                             end = .1)) +
+        start = .7,
+        end = .1
+      )) +
       facet_grid(reformulate(grid_x_axis, grid_y_axis),
-                 labeller = labeller(.rows = label_both, .cols = label_value),
-                 scales = "free",
-                 switch = "y") +
+        labeller = labeller(.rows = label_both, .cols = label_value),
+        scales = "free",
+        switch = "y"
+      ) +
       theme(
         # Text
         text = element_text(size = 12),
@@ -49,8 +55,9 @@ server <- function(input, output, session) {
         # Backgorund
         panel.background = element_rect(fill = NA, color = "gray")
       ) +
-      labs(x = plot_x_axis,
-           y = input$plot_y_axis)
+      labs(
+        x = plot_x_axis,
+        y = input$plot_y_axis
+      )
   })
-
 }
