@@ -16,7 +16,7 @@
 
   # Data to plot
   gg_shape <- readRDS("9950505_main_gg_shape.rds") # 1st BRM submission w/ correct MI-OP
-  gg_shape <- readRDS("9985893_main_gg_shape.rds") # HD version with full pj
+  gg_shape <- readRDS("9987321_main_gg_shape.rds") # HD version with full pj
 
   # Map names of methods
   methods_names <- data.frame(
