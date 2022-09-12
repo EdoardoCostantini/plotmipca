@@ -25,6 +25,12 @@
 
   gg_shape$npc <- as.numeric(as.character(gg_shape$npc))
 
+  # Graph structure
+  plot_x_axis <- "K"
+  moderator <- "npc"
+  grid_x_axis <- "method"
+  grid_y_axis <- "pj"
+
 # Run app ----------------------------------------------------------------------
 
   runApp()
