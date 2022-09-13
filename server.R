@@ -4,6 +4,10 @@
 # Created:   2022-07-28
 # Modified:  2022-09-13
 
+# Load environment
+source("init.R")
+
+# Define server
 server <- function(input, output, session) {
 
   # Width of the page
