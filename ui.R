@@ -2,7 +2,7 @@
 # Objective: user interface
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-09-12
+# Modified:  2022-09-13
 
 ui <- fluidPage(
   fluidRow(
@@ -10,6 +10,12 @@ ui <- fluidPage(
       4,
       hr(),
       h4("Data generation"),
+      radioButtons("j",
+        "Number of observed items",
+        choices = unique(gg_shape$j),
+        selected = unique(gg_shape$j)[1],
+        inline = TRUE
+      ),
       radioButtons("lv",
         "Latent structure",
         choices = rev(unique(gg_shape$lv)),

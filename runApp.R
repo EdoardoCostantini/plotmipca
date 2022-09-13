@@ -2,7 +2,7 @@
 # Objective: script to load data and run app
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-09-12
+# Modified:  2022-09-13
 
 # Packages ---------------------------------------------------------------------
 
@@ -15,8 +15,14 @@
 # Preapre data -----------------------------------------------------------------
 
   # Data to plot
-  gg_shape <- readRDS("9950505_main_gg_shape.rds") # 1st BRM submission w/ correct MI-OP
-  gg_shape <- readRDS("9987321_main_gg_shape.rds") # HD version with full pj
+  gg_shape_ld <- readRDS("9950505_main_gg_shape.rds") # 1st BRM submission w/ correct MI-OP
+  gg_shape_hd <- readRDS("9987321_main_gg_shape.rds") # HD version with full pj
+
+  # Combine data
+  gg_shape <- rbind(
+    cbind(j = 56, gg_shape_ld),
+    cbind(j = 242, gg_shape_hd)
+  )
 
   # Map names of methods
   methods_names <- data.frame(

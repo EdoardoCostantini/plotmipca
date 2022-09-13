@@ -2,11 +2,12 @@
 # Objective: back end
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-09-12
+# Modified:  2022-09-13
 
 server <- function(input, output, session) {
+
+  # Width of the page
   observe({
-    # Width of the page
     if (shinybrowser::get_width() < 768) {
       updateCheckboxGroupInput(session,
         inputId = "method",
@@ -16,9 +17,11 @@ server <- function(input, output, session) {
     }
   })
 
+  # Plot
   output$plot <- renderPlot(res = 96, height = 500, {
     gg_shape %>%
       filter(
+        j == input$j,
         par == input$par,
         lv == input$lv,
         method %in% input$method,
