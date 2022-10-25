@@ -2,7 +2,7 @@
 # Objective: initialization script
 # Author:    Edoardo Costantini
 # Created:   2022-09-13
-# Modified:  2022-09-13
+# Modified:  2022-10-25
 
 # Packages ---------------------------------------------------------------------
 
@@ -42,6 +42,14 @@ levels(gg_shape$method) <- methods_names$plot
 
 # Round pj
 gg_shape$pj <- round(gg_shape$pj, 2)
+
+# Make a different factor for labelling npcs
+gg_shape$NPC <- gg_shape[, "npc"]
+levels(gg_shape$NPC) <- list(
+  "7+" = as.character(7:max(as.numeric(levels(gg_shape[, "npc"])))),
+  "1 to 6" = as.character(1:6),
+  "0" = c("0")
+)
 
 # Make npc names better
 gg_shape$npc <- as.numeric(as.character(gg_shape$npc))

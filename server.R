@@ -2,7 +2,7 @@
 # Objective: back end
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-09-13
+# Modified:  2022-10-25
 
 # Load environment
 source("init.R")
@@ -38,16 +38,18 @@ server <- function(input, output, session) {
       ggplot(aes_string(
         x = plot_x_axis,
         y = input$plot_y_axis,
-        fill = "npc"
+        group = "npc",
+        fill = "NPC"
       )) +
       geom_bar(
         stat = "identity",
-        position = "dodge"
+        position = "dodge",
+        colour = "black",
+        size = .25
       ) +
-      scale_fill_manual(values = gray.colors(length(unique(gg_shape$npc)),
-        start = .7,
-        end = .1
-      )) +
+      scale_fill_manual(
+        values = c(gray.colors(2, start = 0.5, end = 0.8), "white")
+        ) +
       facet_grid(reformulate(grid_x_axis, grid_y_axis),
         labeller = labeller(.rows = label_both, .cols = label_value),
         scales = "free",

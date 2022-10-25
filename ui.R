@@ -2,7 +2,7 @@
 # Objective: user interface
 # Author:    Edoardo Costantini
 # Created:   2022-07-28
-# Modified:  2022-09-13
+# Modified:  2022-10-25
 
 # Load environment
 source("init.R")
@@ -65,10 +65,10 @@ ui <- fluidPage(
       ),
       shinyWidgets::sliderTextInput(
         inputId = "npc",
-        label = "Number of principal components",
+        label = "Number of principal components (NPC)",
         hide_min_max = TRUE,
         choices = sort(unique(gg_shape$npc)),
-        selected = range(gg_shape$npc),
+        selected = c(0, 10),
         grid = TRUE
       ),
     )
