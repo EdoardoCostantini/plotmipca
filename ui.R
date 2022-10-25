@@ -45,7 +45,8 @@ ui <- fluidPage(
       h4("Outcome measures"),
       selectInput("par",
         "Parameter",
-        choices = levels(gg_shape$par)
+        choices = levels(gg_shape$par),
+        selected = "z1 correlation z2"
       ),
       radioButtons("plot_y_axis",
         "Outcome measure",
