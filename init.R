@@ -54,6 +54,14 @@ levels(gg_shape$NPC) <- list(
 # Make npc names better
 gg_shape$npc <- as.numeric(as.character(gg_shape$npc))
 
+# Make Parameter names better
+current_levels <- levels(gg_shape$par)
+
+current_levels <- gsub("~1", " mean", current_levels)
+current_levels <- gsub("r", " correlation ", current_levels)
+current_levels <- gsub("~~", " covariance ", current_levels)
+levels(gg_shape$par) <- current_levels
+
 # Graph structure
 plot_x_axis <- "K"
 moderator <- "npc"
