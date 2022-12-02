@@ -10,7 +10,7 @@ plotmipca(...)
 None
 }
 \description{
-Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca}.
+Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
 }
 \examples{
 plotmipca()
