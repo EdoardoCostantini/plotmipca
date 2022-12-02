@@ -1,5 +1,7 @@
 # plotmipca, or a shiny dashboard for mi-pca
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7391523.svg)](https://doi.org/10.5281/zenodo.7391523)
+
 You can interact with the results from the study [mi-pca](<https://github.com/EdoardoCostantini/mi-pca>) by:
 - Visit the online [shiny app](https://edoardocostantini.shinyapps.io/plotmipca/).
 - Installing this app locally as an R package:
