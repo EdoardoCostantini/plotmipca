@@ -62,9 +62,3 @@ levels(ggshape$par) <- current_levels
 
 # Set data for use
 usethis::use_data(ggshape, overwrite = TRUE)
-
-# Graph structure
-plot_x_axis <- "K"
-moderator <- "npc"
-grid_x_axis <- "method"
-grid_y_axis <- "pj"
