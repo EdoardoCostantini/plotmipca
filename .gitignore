@@ -3,6 +3,3 @@
 
 # Ignore published shiny app
 *.dcf
-
-# Ignore raw rds
-*.rds

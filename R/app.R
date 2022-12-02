@@ -1,11 +1,34 @@
 # Project:   plotmipca
-# Objective: MiminallyRun app description
+# Objective: Function to run app
 # Author:    Edoardo Costantini
 # Created:   2022-12-02
 # Modified:  2022-12-02
 # Notes:
 
+#' plotmipca
+#'
+#' Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
+#' 
+#' @export
+#' @import shiny 
+#' @import shinybrowser
+#' @import dplyr
+#' @import ggplot2
+#' @import shinyWidgets
+#' @import pkgload
+#' @examples plotmipca()
+#' @return None
+#' 
 plotmipca <- function(...) {
+
+    # Set up -------------------------------------------------------------------
+    
+    # Graph structure
+    plot_x_axis <- "K"
+    moderator <- "npc"
+    grid_x_axis <- "method"
+    grid_y_axis <- "pj"
+
     
     # UI -----------------------------------------------------------------------
 
