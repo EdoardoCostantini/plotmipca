@@ -145,7 +145,7 @@ plotmipca <- function(...) {
                     colour = "black",
                     size = .25
                 ) +
-                scale_fill_manual(
+                scale_fill_manuaRl(
                     values = c(gray.colors(2, start = 0.5, end = 0.8), "white")
                 ) +
                 facet_grid(reformulate(grid_x_axis, grid_y_axis),
