@@ -1,6 +1,6 @@
 # Shiny app: plot mi-pca results
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7391523.svg)](https://doi.org/10.5281/zenodo.7391523)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7452124.svg)](https://doi.org/10.5281/zenodo.7452124)
 
 You can interact with the results from the study [mi-pca](<https://github.com/EdoardoCostantini/mi-pca>) by:
 
