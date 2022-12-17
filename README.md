@@ -1,4 +1,4 @@
-# plotmipca, or a shiny dashboard for mi-pca
+# Shiny app: plot mi-pca results
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7391523.svg)](https://doi.org/10.5281/zenodo.7391523)
 
@@ -10,6 +10,6 @@ You can interact with the results from the study [mi-pca](<https://github.com/Ed
     ```
     If you install the shiny app as a package, you can run it by simply typing:
     ```
-    plotmipca::plotmipca()
+    plot.mi.pca::plotResults()
     ```
     in your R console.

@@ -1,11 +1,11 @@
-# Project:   plotmipca
+# Project:   plot.mi.pca
 # Objective: Function to run app
 # Author:    Edoardo Costantini
 # Created:   2022-12-02
 # Modified:  2022-12-02
 # Notes:
 
-#' plotmipca
+#' plotResults
 #'
 #' Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
 #' 
@@ -16,10 +16,9 @@
 #' @import ggplot2
 #' @import shinyWidgets
 #' @import pkgload
-#' @examples plotmipca()
-#' @return None
+#' @return Shiny app UI.
 #' 
-plotmipca <- function(...) {
+plotResults <- function() {
 
     # Set up -------------------------------------------------------------------
     
