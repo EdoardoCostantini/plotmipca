@@ -12,3 +12,33 @@ Shiny app UI.
 \description{
 Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
 }
+\details{
+The interface of the Shiny app allows you to change the values of the following simulation study experimental factors:
+\itemize{
+\item Number of observed items
+\item Presence of latent structure (if yes, 7 latent variables are used)
+\item Discrete levels (number of categories for discretized items)
+\item Proportion of noise variables
+\item Missing data treatments:
+\itemize{
+\item MI-PCR-ALL: mi-pca using pca on all data, after a round of single imputation
+\item MI-PCR-ALL (oracle): mi-pca using pca on all data computed on the originally fully observed data
+\item MI-PCR-AUX: mi-pca using pca only on auxiliary variables
+\item MI-PCR-VBV: mi-pca using pca only on a variable-by-variable basis
+\item MI-QP: mice using the quickpred function from the R package mice to select the predictors for the univariate imputation models via the correlation-based threshold
+\item MI-OR: mice with oracle knowledge on which predictors to use (the univariate imputation models included the other variables under imputation and the predictors that were used to impose missingness)
+\item MI-MI: mice with minimal missing data models (only variables under imputation used as predictors in the imputation models)
+\item CC: complete case analysis
+\item OG: original fully-observed data
+}
+\item Number of principal components
+\item Outcome measure:
+\itemize{
+\item (percent relative) bias
+\item CIC (confidence interval coverage)
+\item CIW (average confidence interval)
+\item mcsd (standard deviation of the estimate across the monte carlo simulations)
+}
+\item Parameter (which statistic for which variable)
+}
+}

@@ -5,7 +5,7 @@
 \alias{dataMids}
 \title{dataMids}
 \format{
-A list containing (1) simplified mids for 81 conditions described in a (2) data.frame
+A list containing simplified mids for (1) the simulation study and (2) the data application
 }
 \usage{
 data(dataMids)

@@ -11,27 +11,26 @@
 #' The columns of the data.frame are
 #'
 #' \itemize{
-#'   \item tag. Character vector describing the condition
-#'   \item npcs. Number of principal components used
-#'   \item method. Imputation method used
-#'   \item nla. Number of latent variables used to generate the data
-#'   \item auxcor. Correlation between the main latent variables and the auxiliary ones
-#'   \item pm. Proportion of missing cases on each variable with missing values
-#'   \item mech. Missing data mechanism
-#'   \item loc. Location of the missing data in the variable distribution
-#'   \item p. Total number of items
-#'   \item stat. Statistics computed
-#'   \item vars. Variables involved in the statistic
-#'   \item est_avg. Average estimate of the statistic over the Monte Carlo repetitions
+#'   \item j. Total number of items involved
+#'   \item K. Discretization level (number of categories)
+#'   \item D. Proportion of discretized variables
+#'   \item interval. Whether data was discretized to interval or ordinal scale
+#'   \item pj. Proportion of junk variables
+#'   \item lv. Presence of latent structure
+#'   \item par. Parameter of interest
+#'   \item npc. Number of pcs requested
+#'   \item method. Missing data treatment used
+#'   \item Mean. Average estimate of the statistic of interest
 #'   \item mcsd. Standard deviation of the statistic estimate over the Monte Carlo repetitions
+#'   \item PC_exp. Explained variance by the extracted PCs
 #'   \item ref. True value of the statistic
-#'   \item RB. Raw bias
-#'   \item PRB. Percent relative bias
+#'   \item bias. Raw bias
 #'   \item CIC. Confidence interval coverage
 #'   \item CIW. Average confidence interval width
 #'   \item CIW_sd. Standard deviation of the confidence interval width
-#'   \item CIW_lwr_avg. Average value of the confidence interval lower bound
-#'   \item CIW_upr_avg. Average value of the confidence interval upper bound
+#'   \item lwr_avg. Average value of the confidence interval lower bound
+#'   \item upr_avg. Average value of the confidence interval upper bound
+#'   \item NPC. Number of PCs used by method
 #' }
 #'
 #' @docType data
@@ -49,5 +48,5 @@ NULL
 #' @keywords datasets
 #' @name dataMids
 #' @usage data(dataMids)
-#' @format A list containing (1) simplified mids for 81 conditions described in a (2) data.frame
+#' @format A list containing simplified mids for (1) the simulation study and (2) the data application
 NULL
