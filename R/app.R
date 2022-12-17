@@ -2,7 +2,7 @@
 # Objective: Function to run app
 # Author:    Edoardo Costantini
 # Created:   2022-12-02
-# Modified:  2022-12-02
+# Modified:  2022-12-17
 # Notes:
 
 #' plotResults
@@ -39,27 +39,27 @@ plotResults <- function() {
                 h4("Data generation"),
                 radioButtons("j",
                     "Number of observed items",
-                    choices = unique(ggshape$j),
-                    selected = unique(ggshape$j)[1],
+                    choices = unique(dataResults$j),
+                    selected = unique(dataResults$j)[1],
                     inline = TRUE
                 ),
                 radioButtons("lv",
                     "Latent structure",
-                    choices = rev(unique(ggshape$lv)),
+                    choices = rev(unique(dataResults$lv)),
                     selected = TRUE,
                     inline = TRUE
                 ),
                 checkboxGroupInput("K",
                     "Discrete levels",
                     inline = TRUE,
-                    choices = levels(ggshape$K),
-                    selected = levels(ggshape$K)[c(1, 3, 5)]
+                    choices = levels(dataResults$K),
+                    selected = levels(dataResults$K)[c(1, 3, 5)]
                 ),
                 checkboxGroupInput("pj",
                     "Proportion of noise variables",
                     inline = TRUE,
-                    choices = unique(ggshape$pj),
-                    selected = unique(ggshape$pj)[c(1, 4)]
+                    choices = unique(dataResults$pj),
+                    selected = unique(dataResults$pj)[c(1, 4)]
                 ),
             ),
             column(
@@ -68,7 +68,7 @@ plotResults <- function() {
                 h4("Outcome measures"),
                 selectInput("par",
                     "Parameter",
-                    choices = levels(ggshape$par),
+                    choices = levels(dataResults$par),
                     selected = "z1 correlation z2"
                 ),
                 radioButtons("plot_y_axis",
@@ -83,15 +83,15 @@ plotResults <- function() {
                 h4("Missing data treatments"),
                 checkboxGroupInput("method",
                     "Methods",
-                    choices = levels(ggshape$method),
-                    selected = levels(ggshape$method)[c(1, 3:5)],
+                    choices = levels(dataResults$method),
+                    selected = levels(dataResults$method)[c(1, 3:5)],
                     inline = TRUE
                 ),
                 shinyWidgets::sliderTextInput(
                     inputId = "npc",
                     label = "Number of principal components (NPC)",
                     hide_min_max = TRUE,
-                    choices = sort(unique(ggshape$npc)),
+                    choices = sort(unique(dataResults$npc)),
                     selected = c(0, 10),
                     grid = TRUE
                 ),
@@ -113,14 +113,14 @@ plotResults <- function() {
                 updateCheckboxGroupInput(session,
                     inputId = "method",
                     label = "Methods",
-                    selected = levels(ggshape$method)[4]
+                    selected = levels(dataResults$method)[4]
                 )
             }
         })
 
         # Plot
         output$plot <- renderPlot(res = 96, height = 500, {
-            ggshape %>%
+            dataResults %>%
                 filter(
                     j == input$j,
                     par == input$par,
@@ -144,7 +144,7 @@ plotResults <- function() {
                     colour = "black",
                     size = .25
                 ) +
-                scale_fill_manuaRl(
+                scale_fill_manual(
                     values = c(gray.colors(2, start = 0.5, end = 0.8), "white")
                 ) +
                 facet_grid(reformulate(grid_x_axis, grid_y_axis),
@@ -170,5 +170,6 @@ plotResults <- function() {
 
     # Run app ------------------------------------------------------------------
 
-    shinyApp(ui, server, ...)
+    shinyApp(ui, server)
+
 }
