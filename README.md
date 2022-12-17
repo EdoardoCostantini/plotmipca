@@ -3,13 +3,34 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7391523.svg)](https://doi.org/10.5281/zenodo.7391523)
 
 You can interact with the results from the study [mi-pca](<https://github.com/EdoardoCostantini/mi-pca>) by:
+
 - Visit the online [shiny app](https://edoardocostantini.shinyapps.io/plotmipca/).
 - Installing this app locally as an R package:
+
     ```
     devtools::install_github("https://github.com/EdoardoCostantini/plotmipca")
     ```
-    If you install the shiny app as a package, you can run it by simply typing:
-    ```
-    plot.mi.pca::plotResults()
-    ```
-    in your R console.
+
+## Plots
+
+### Simulation study results
+
+By using the R function:
+
+```
+plot.mi.pca::plotResults()
+```
+
+a shiny app is started that allows you to plot the results of the simulation study.
+The help file shows how to use and read the plots produced by the app.
+
+### Convergence plots
+
+By using the R function:
+
+```
+plot.mi.spcr::plotMids()
+```
+
+a shiny app is started that allows you to study the trace plots for MI imputation algorithms used in the simulation study.
+The help file shows how to use and read the plots produced by the app.
