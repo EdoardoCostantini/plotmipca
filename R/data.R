@@ -1,4 +1,4 @@
-# Project:   plot.mi.pca
+# Project:   plotmipca
 # Objective: container for data documentation
 # Author:    Edoardo Costantini
 # Created:   2022-12-17

@@ -18,7 +18,7 @@ You can interact with the results from the study [mi-pca](<https://github.com/Ed
 By using the R function:
 
 ```
-plot.mi.pca::plotResults()
+plotmipca::plotResults()
 ```
 
 a shiny app is started that allows you to plot the results of the simulation study.

@@ -1,4 +1,4 @@
-# Project:   plot.mi.pca
+# Project:   plotmipca
 # Objective: Function to run app
 # Author:    Edoardo Costantini
 # Created:   2022-12-02
