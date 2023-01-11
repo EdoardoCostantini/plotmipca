@@ -8,9 +8,9 @@ You can interact with the results from the study [mi-pca](<https://github.com/Ed
 - Installing this app locally as an R package:
 
     - Install from GitHub:
-    ```
-    devtools::install_github("https://github.com/EdoardoCostantini/plotmipca")
-    ```
+        ```
+        devtools::install_github("https://github.com/EdoardoCostantini/plotmipca")
+        ```
     - Install from Zenodo version
         - Go to the [Zenodo page](https://doi.org/10.5281/zenodo.7452124)
         - Dowload the `.zip` archive
@@ -25,18 +25,20 @@ You can interact with the results from the study [mi-pca](<https://github.com/Ed
             - `shinyWidgets`
             - `shiny`
             - `usethis`
+
             You can use the following command to install any missing dependency:
             ```
             install.packages("shinybrowser")
             ```
+
         - Install the package from the local unzipped folder
-        ```
-        install.packages(
-            "path to folder with the package",
-            repos = NULL,
-            type = "source"
-        )
-        ```
+            ```
+            install.packages(
+                "path to folder with the package",
+                repos = NULL,
+                type = "source"
+            )
+            ```
 
 ## Plots
 
