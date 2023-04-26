@@ -66,7 +66,10 @@ plotResults <- function() {
 
         # App title
         shiny::titlePanel(
-            shiny::h1("High-dimensional imputation for the social sciences", align = "center")
+            shiny::h1(
+                'Solving the "many variables" problem in MICE with principal component regression', 
+                align = "center"
+                )
         ),
         shiny::column(
             width = 10,
