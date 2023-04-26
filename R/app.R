@@ -461,6 +461,7 @@ plotResults <- function() {
                     ylab = "",
                     strip = strip.combined,
                     par.strip.text = list(lines = 0.5),
+                    aspect = 9 / 16
                 )
             }
         )
@@ -545,6 +546,7 @@ plotResults <- function() {
                     ylab = "",
                     strip = strip.combined,
                     par.strip.text = list(lines = 0.5),
+                    aspect = 9/16
                 )
             }
         )
