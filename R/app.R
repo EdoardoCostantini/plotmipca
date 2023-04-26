@@ -57,6 +57,8 @@ plotResults <- function() {
     grid_x_axis <- "method"
     grid_y_axis <- "pj"
 
+    # Plot tag
+    plot_tag <- " for the simulation study"
     
     # UI -----------------------------------------------------------------------
 
@@ -76,6 +78,7 @@ plotResults <- function() {
                 shiny::tabPanel(
                     title = "Simulation study",
                     shiny::fluidRow(
+                        # Simulation study inputs ------------------------------
                         shiny::column(
                             width = 3,
                             shiny::titlePanel(
@@ -89,26 +92,6 @@ plotResults <- function() {
                                 ),
                                 shiny::tabPanel(
                                     title = "1. Setup",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "2. Correlation matrix",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "3. PC Loadings",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "4. Non-graphical decision rules",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "5. CPVE",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "6. Conclusions",
                                     "Coming Soon"
                                 )
                             )
@@ -191,9 +174,147 @@ plotResults <- function() {
                     )
                 ),
                 shiny::tabPanel(
+                    title = "Simulation study: convergence checks",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            shiny::titlePanel(
+                                shiny::h3("Trace plots fo convergence", align = "center")
+                            ),
+                            shiny::tabsetPanel(
+                                type = "tabs",
+                                shiny::tabPanel(
+                                    title = "Introduction",
+                                    "Coming Soon"
+                                ),
+                                shiny::tabPanel(
+                                    title = "1. Setup",
+                                    "Coming Soon"
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 7,
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Inputs", align = "center")
+                                ),
+                                # Simulation study traceplots inputs -----------
+                                column(
+                                    3,
+                                    hr(),
+                                    selectInput("conv_sim_method",
+                                        "Imputation method:",
+                                        choices = c("MIMI", "MIOP", "MIOR", "aux", "vbv"),
+                                        selected = "MIMI"
+                                    ),
+                                ),
+                                column(
+                                    3,
+                                    hr(),
+                                    selectInput(
+                                        inputId = "conv_sim_var",
+                                        label = "Variable",
+                                        choices = rownames(dataMids$sim[[1]]$chainMean[, , 1]),
+                                        selected = rownames(dataMids$sim[[1]]$chainMean[, , 1])[1]
+                                    ),
+                                ),
+                                column(
+                                    3,
+                                    hr(),
+                                    shinyWidgets::sliderTextInput(
+                                        inputId = "conv_sim_iters",
+                                        label = "Iteration range",
+                                        hide_min_max = TRUE,
+                                        choices = 0:100,
+                                        selected = c(0, 25),
+                                        grid = FALSE
+                                    ),
+                                )
+                            ),
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Plot", align = "center")
+                                ),
+                                shiny::plotOutput("mids_sim_plot")
+                            ),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                ),
+                shiny::tabPanel(
                     title = "Case study",
                     "Coming soon"
                 ),
+                shiny::tabPanel(
+                    title = "Case study: convergence checks",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            shiny::titlePanel(
+                                shiny::h3("Trace plots fo convergence", align = "center")
+                            ),
+                            shiny::tabsetPanel(
+                                type = "tabs",
+                                shiny::tabPanel(
+                                    title = "Introduction",
+                                    "Coming Soon"
+                                ),
+                                shiny::tabPanel(
+                                    title = "1. Setup",
+                                    "Coming Soon"
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 7,
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Inputs", align = "center")
+                                ),
+                                # Simulation study traceplots inputs -----------
+                                column(
+                                    3,
+                                    hr(),
+                                    selectInput("conv_case_method",
+                                        "Imputation method:",
+                                        choices = c("expert", "si4auxall", "pcraux", "vbv", "default"),
+                                        selected = "expert"
+                                    ),
+                                ),
+                                column(
+                                    3,
+                                    hr(),
+                                    selectInput(
+                                        inputId = "conv_case_var",
+                                        label = "Variable",
+                                        choices = rownames(dataMids$fdd[[1]]$chainMean[, , 1]),
+                                        selected = rownames(dataMids$fdd[[1]]$chainMean[, , 1])[1]
+                                    ),
+                                ),
+                                column(
+                                    3,
+                                    hr(),
+                                    shinyWidgets::sliderTextInput(
+                                        inputId = "conv_case_iters",
+                                        label = "Iteration range",
+                                        hide_min_max = TRUE,
+                                        choices = 0:100,
+                                        selected = c(0, 25),
+                                        grid = FALSE
+                                    ),
+                                )
+                            ),
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Plot", align = "center")
+                                ),
+                                shiny::plotOutput("mids_case_plot")
+                            ),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                )
             )
         )
     )
@@ -212,7 +333,8 @@ plotResults <- function() {
             }
         })
 
-        # Plot
+        # Simulation study plot ------------------------------------------------
+
         output$plot <- renderPlot(res = 96, height = 500, {
             dataResults %>%
                 filter(
@@ -260,6 +382,176 @@ plotResults <- function() {
                     y = input$plot_y_axis
                 )
         })
+
+        # Simulation study traceplots ------------------------------------------
+
+        output$mids_sim_plot <- renderPlot(
+            res = 96,
+            height = 750,
+            {
+                
+                cnd_id <- grep(input$conv_sim_method, names(dataMids$sim))
+                
+                # Work with simple object name
+                x <- dataMids$sim[[cnd_id]]
+
+                # Default arguments that you could change in MICE
+                type <- "l"
+                col <- 1:10
+                lty <- 1
+                theme <- mice::mice.theme()
+                layout <- c(2, 1)
+
+                # Extract objects I need
+                mn <- x$chainMean
+                sm <- sqrt(x$chainVar)
+                m <- x$m
+                it <- x$iteration
+
+                # select subset of non-missing entries
+                # obs <- apply(!(is.nan(mn) | is.na(mn)), 1, all)
+                # varlist <- names(obs)[obs]
+                varlist <- input$conv_sim_var
+                # varlist <- "z1"
+
+                # Prepare objects for plotting
+                mn <- matrix(aperm(mn[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                sm <- matrix(aperm(sm[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                adm <- expand.grid(seq_len(it), seq_len(m), c("mean", "sd"))
+                data <- cbind(adm, rbind(mn, sm))
+                colnames(data) <- c(".it", ".m", ".ms", varlist)
+
+                # Create formula
+                formula <- as.formula(paste0(
+                    paste0(varlist, collapse = "+"),
+                    "~.it|.ms"
+                ))
+
+                # Dummy to trick R CMD check
+                .m <- NULL
+                rm(.m)
+
+                # Load function to obtain the correct plot arrangement
+                strip.combined <- function(which.given, which.panel, factor.levels, ...) {
+                    if (which.given == 1) {
+                        lattice::panel.rect(0, 0, 1, 1,
+                            col = theme$strip.background$col, border = 1
+                        )
+                        lattice::panel.text(
+                            x = 0, y = 0.5, pos = 4,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                    if (which.given == 2) {
+                        lattice::panel.text(
+                            x = 1, y = 0.5, pos = 2,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                }
+
+                # Make plot
+                lattice::xyplot(
+                    x = formula, data = data, groups = .m,
+                    type = type, lty = lty, col = col, layout = layout,
+                    scales = list(
+                        y = list(relation = "free"),
+                        x = list(alternating = FALSE)
+                    ),
+                    as.table = TRUE,
+                    xlim = c(input$conv_sim_iters[1] - 1, input$conv_sim_iters[2] + 1),
+                    xlab = "Iteration",
+                    ylab = "",
+                    strip = strip.combined,
+                    par.strip.text = list(lines = 0.5),
+                )
+            }
+        )
+
+        # > Case study traceplots ----------------------------------------------
+
+        output$mids_case_plot <- renderPlot(
+            res = 96,
+            height = 750,
+            {
+                cnd_id <- grep(input$conv_case_method, names(dataMids$fdd))
+
+                # Work with simple object name
+                x <- dataMids$fdd[[cnd_id]]
+
+                # Default arguments that you could change in MICE
+                type <- "l"
+                col <- 1:10
+                lty <- 1
+                theme <- mice::mice.theme()
+                layout <- c(2, 1)
+
+                # Extract objects I need
+                mn <- x$chainMean
+                sm <- sqrt(x$chainVar)
+                m <- x$m
+                it <- x$iteration
+
+                # select subset of non-missing entries
+                # obs <- apply(!(is.nan(mn) | is.na(mn)), 1, all)
+                # varlist <- names(obs)[obs]
+                varlist <- input$conv_case_var
+                # varlist <- "z1"
+
+                # Prepare objects for plotting
+                mn <- matrix(aperm(mn[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                sm <- matrix(aperm(sm[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                adm <- expand.grid(seq_len(it), seq_len(m), c("mean", "sd"))
+                data <- cbind(adm, rbind(mn, sm))
+                colnames(data) <- c(".it", ".m", ".ms", varlist)
+
+                # Create formula
+                formula <- as.formula(paste0(
+                    paste0(varlist, collapse = "+"),
+                    "~.it|.ms"
+                ))
+
+                # Dummy to trick R CMD check
+                .m <- NULL
+                rm(.m)
+
+                # Load function to obtain the correct plot arrangement
+                strip.combined <- function(which.given, which.panel, factor.levels, ...) {
+                    if (which.given == 1) {
+                        lattice::panel.rect(0, 0, 1, 1,
+                            col = theme$strip.background$col, border = 1
+                        )
+                        lattice::panel.text(
+                            x = 0, y = 0.5, pos = 4,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                    if (which.given == 2) {
+                        lattice::panel.text(
+                            x = 1, y = 0.5, pos = 2,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                }
+
+                # Make plot
+                lattice::xyplot(
+                    x = formula, data = data, groups = .m,
+                    type = type, lty = lty, col = col, layout = layout,
+                    scales = list(
+                        y = list(relation = "free"),
+                        x = list(alternating = FALSE)
+                    ),
+                    as.table = TRUE,
+                    xlim = c(input$conv_case_iters[1] - 1, input$conv_case_iters[2] + 1),
+                    xlab = "Iteration",
+                    ylab = "",
+                    strip = strip.combined,
+                    par.strip.text = list(lines = 0.5),
+                )
+            }
+        )
+
     }
 
     # Run app ------------------------------------------------------------------
