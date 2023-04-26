@@ -97,7 +97,7 @@ plotResults <- function() {
                             )
                         ),
                         shiny::column(
-                            width = 7,
+                            width = 9,
                             shiny::fluidRow(
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
@@ -194,15 +194,14 @@ plotResults <- function() {
                             )
                         ),
                         shiny::column(
-                            width = 7,
+                            width = 9,
                             shiny::fluidRow(
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
                                 ),
                                 # Simulation study traceplots inputs -----------
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     selectInput("conv_sim_method",
                                         "Imputation method:",
                                         choices = c("MIMI", "MIOP", "MIOR", "aux", "vbv"),
@@ -210,8 +209,7 @@ plotResults <- function() {
                                     ),
                                 ),
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     selectInput(
                                         inputId = "conv_sim_var",
                                         label = "Variable",
@@ -220,8 +218,7 @@ plotResults <- function() {
                                     ),
                                 ),
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     shinyWidgets::sliderTextInput(
                                         inputId = "conv_sim_iters",
                                         label = "Iteration range",
@@ -267,15 +264,14 @@ plotResults <- function() {
                             )
                         ),
                         shiny::column(
-                            width = 7,
+                            width = 9,
                             shiny::fluidRow(
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
                                 ),
                                 # Simulation study traceplots inputs -----------
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     selectInput("conv_case_method",
                                         "Imputation method:",
                                         choices = c("expert", "si4auxall", "pcraux", "vbv", "default"),
@@ -283,8 +279,7 @@ plotResults <- function() {
                                     ),
                                 ),
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     selectInput(
                                         inputId = "conv_case_var",
                                         label = "Variable",
@@ -293,8 +288,7 @@ plotResults <- function() {
                                     ),
                                 ),
                                 column(
-                                    3,
-                                    hr(),
+                                    4,
                                     shinyWidgets::sliderTextInput(
                                         inputId = "conv_case_iters",
                                         label = "Iteration range",
