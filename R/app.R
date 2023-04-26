@@ -45,6 +45,8 @@
 #' @import ggplot2
 #' @import shinyWidgets
 #' @import pkgload
+#' @import mice
+#' @import lattice
 #' @return Shiny app UI.
 #' 
 plotResults <- function() {
@@ -57,9 +59,6 @@ plotResults <- function() {
     grid_x_axis <- "method"
     grid_y_axis <- "pj"
 
-    # Plot tag
-    plot_tag <- " for the simulation study"
-    
     # UI -----------------------------------------------------------------------
 
     ui <- shiny::fluidPage(
@@ -81,9 +80,9 @@ plotResults <- function() {
                 shiny::tabPanel(
                     title = "Simulation study",
                     shiny::fluidRow(
-                        # Simulation study inputs ------------------------------
                         shiny::column(
                             width = 3,
+                            # Simulation study: Description --------------------
                             shiny::titlePanel(
                                 shiny::h3("Simulation study", align = "center")
                             ),
@@ -101,6 +100,7 @@ plotResults <- function() {
                         ),
                         shiny::column(
                             width = 9,
+                            # Simulation study: inputs -------------------------
                             shiny::fluidRow(
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
@@ -166,6 +166,7 @@ plotResults <- function() {
                                     ),
                                 )
                             ),
+                            # Simulation study: Output -------------------------
                             shiny::fluidRow(
                                 shiny::titlePanel(
                                     shiny::h3("Plot", align = "center")
@@ -181,6 +182,7 @@ plotResults <- function() {
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
+                            # Simulation study Convergence: Description --------
                             shiny::titlePanel(
                                 shiny::h3("Trace plots fo convergence", align = "center")
                             ),
@@ -199,10 +201,10 @@ plotResults <- function() {
                         shiny::column(
                             width = 9,
                             shiny::fluidRow(
+                                # Simulation study Convergence: Input ----------
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
                                 ),
-                                # Simulation study traceplots inputs -----------
                                 column(
                                     4,
                                     selectInput("conv_sim_method",
@@ -233,6 +235,7 @@ plotResults <- function() {
                                 )
                             ),
                             shiny::fluidRow(
+                                # Simulation study Convergence: Output ---------
                                 shiny::titlePanel(
                                     shiny::h3("Plot", align = "center")
                                 ),
@@ -251,6 +254,7 @@ plotResults <- function() {
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
+                            # Case study convergence: description --------------
                             shiny::titlePanel(
                                 shiny::h3("Trace plots fo convergence", align = "center")
                             ),
@@ -269,10 +273,10 @@ plotResults <- function() {
                         shiny::column(
                             width = 9,
                             shiny::fluidRow(
+                                # Case study convergence: inputs ----------
                                 shiny::titlePanel(
                                     shiny::h3("Inputs", align = "center")
                                 ),
-                                # Simulation study traceplots inputs -----------
                                 column(
                                     4,
                                     selectInput("conv_case_method",
@@ -303,6 +307,7 @@ plotResults <- function() {
                                 )
                             ),
                             shiny::fluidRow(
+                                # Case study convergence: output ---------------
                                 shiny::titlePanel(
                                     shiny::h3("Plot", align = "center")
                                 ),
