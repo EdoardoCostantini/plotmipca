@@ -23,7 +23,7 @@ server <- function(input, output, session) {
 
     output$plot <- renderPlot(
         res = 96,
-        height = 500,
+        height = 425,
         {
             plot_simulation(
                 results = dataResults,
@@ -43,7 +43,7 @@ server <- function(input, output, session) {
 
     output$mids_sim_plot <- renderPlot(
         res = 96,
-        height = 750,
+        height = 425,
         {
             trace_plot(
                 mids_data = dataMids$sim,
@@ -58,7 +58,7 @@ server <- function(input, output, session) {
 
     output$mids_case_plot <- renderPlot(
         res = 96,
-        height = 750,
+        height = 425,
         {
             trace_plot(
                 mids_data = dataMids$fdd,

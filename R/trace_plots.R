@@ -98,7 +98,6 @@ trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
         xlab = "Iteration",
         ylab = "",
         strip = strip.combined,
-        par.strip.text = list(lines = 0.5),
-        aspect = 9 / 16
+        par.strip.text = list(lines = 0.5)
     )
 }
