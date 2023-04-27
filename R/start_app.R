@@ -5,7 +5,7 @@
 # Modified:  2023-04-27
 # Notes:
 
-#' plotResults
+#' start_app
 #'
 #' Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
 #'
@@ -49,7 +49,7 @@
 #' @import lattice
 #' @return Shiny app UI.
 #'
-plotResults <- function() {
+start_app <- function() {
     shinyApp(
         ui = ui_call(),
         server = server
