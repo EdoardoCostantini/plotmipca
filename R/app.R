@@ -45,6 +45,8 @@
 #' @import ggplot2
 #' @import shinyWidgets
 #' @import pkgload
+#' @import mice
+#' @import lattice
 #' @return Shiny app UI.
 #' 
 plotResults <- function() {
@@ -57,80 +59,266 @@ plotResults <- function() {
     grid_x_axis <- "method"
     grid_y_axis <- "pj"
 
-    
     # UI -----------------------------------------------------------------------
 
-    ui <- fluidPage(
-        fluidRow(
-            column(
-                4,
-                hr(),
-                h4("Data generation"),
-                radioButtons("j",
-                    "Number of observed items",
-                    choices = unique(dataResults$j),
-                    selected = unique(dataResults$j)[1],
-                    inline = TRUE
-                ),
-                radioButtons("lv",
-                    "Latent structure",
-                    choices = rev(unique(dataResults$lv)),
-                    selected = TRUE,
-                    inline = TRUE
-                ),
-                checkboxGroupInput("K",
-                    "Discrete levels",
-                    inline = TRUE,
-                    choices = levels(dataResults$K),
-                    selected = levels(dataResults$K)[c(1, 3, 5)]
-                ),
-                checkboxGroupInput("pj",
-                    "Proportion of noise variables",
-                    inline = TRUE,
-                    choices = unique(dataResults$pj),
-                    selected = unique(dataResults$pj)[c(1, 4)]
-                ),
-            ),
-            column(
-                4,
-                hr(),
-                h4("Outcome measures"),
-                selectInput("par",
-                    "Parameter",
-                    choices = levels(dataResults$par),
-                    selected = "z1 correlation z2"
-                ),
-                radioButtons("plot_y_axis",
-                    "Outcome measure",
-                    choices = c("bias", "CIC", "CIW", "mcsd"),
-                    inline = TRUE
-                ),
-            ),
-            column(
-                4,
-                hr(),
-                h4("Missing data treatments"),
-                checkboxGroupInput("method",
-                    "Methods",
-                    choices = levels(dataResults$method),
-                    selected = levels(dataResults$method)[c(1, 3:5)],
-                    inline = TRUE
-                ),
-                shinyWidgets::sliderTextInput(
-                    inputId = "npc",
-                    label = "Number of principal components (NPC)",
-                    hide_min_max = TRUE,
-                    choices = sort(unique(dataResults$npc)),
-                    selected = c(0, 10),
-                    grid = TRUE
-                ),
-            )
-        ),
+    ui <- shiny::fluidPage(
 
-        # Silent extraction of size
-        shinybrowser::detect(),
-        hr(),
-        plotOutput("plot"),
+        # App title
+        shiny::titlePanel(
+            shiny::h1(
+                'Solving the "many variables" problem in MICE with principal component regression', 
+                align = "center"
+                )
+        ),
+        shiny::column(
+            width = 10,
+            offset = 1,
+            # Create tabs for different plotting aspects
+            shiny::tabsetPanel(
+                type = "tabs",
+                selected = "Simulation study",
+                shiny::tabPanel(
+                    title = "Simulation study",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            # Simulation study: Description --------------------
+                            shiny::titlePanel(
+                                shiny::h3("Simulation study", align = "center")
+                            ),
+                            shiny::tabsetPanel(
+                                type = "tabs",
+                                shiny::tabPanel(
+                                    title = "Introduction",
+                                    "Coming Soon"
+                                ),
+                                shiny::tabPanel(
+                                    title = "1. Setup",
+                                    "Coming Soon"
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            # Simulation study: inputs -------------------------
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Inputs", align = "center")
+                                ),
+                                column(
+                                    4,
+                                    h4("Data generation"),
+                                    radioButtons("j",
+                                        "Number of observed items",
+                                        choices = unique(dataResults$j),
+                                        selected = unique(dataResults$j)[1],
+                                        inline = TRUE
+                                    ),
+                                    radioButtons("lv",
+                                        "Latent structure",
+                                        choices = rev(unique(dataResults$lv)),
+                                        selected = TRUE,
+                                        inline = TRUE
+                                    ),
+                                    checkboxGroupInput("K",
+                                        "Discrete levels",
+                                        inline = TRUE,
+                                        choices = levels(dataResults$K),
+                                        selected = levels(dataResults$K)[c(1, 3, 5)]
+                                    ),
+                                    checkboxGroupInput("pj",
+                                        "Proportion of noise variables",
+                                        inline = TRUE,
+                                        choices = unique(dataResults$pj),
+                                        selected = unique(dataResults$pj)[c(1, 4)]
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    h4("Outcome measures"),
+                                    selectInput("par",
+                                        "Parameter",
+                                        choices = levels(dataResults$par),
+                                        selected = "z1 correlation z2"
+                                    ),
+                                    radioButtons("plot_y_axis",
+                                        "Outcome measure",
+                                        choices = c("bias", "CIC", "CIW", "mcsd"),
+                                        inline = TRUE
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    h4("Missing data treatments"),
+                                    checkboxGroupInput("method",
+                                        "Methods",
+                                        choices = levels(dataResults$method),
+                                        selected = levels(dataResults$method)[c(1, 3:5)],
+                                        inline = TRUE
+                                    ),
+                                    shinyWidgets::sliderTextInput(
+                                        inputId = "npc",
+                                        label = "Number of principal components (NPC)",
+                                        hide_min_max = TRUE,
+                                        choices = sort(unique(dataResults$npc)),
+                                        selected = c(0, 10),
+                                        grid = TRUE
+                                    ),
+                                )
+                            ),
+                            # Simulation study: Output -------------------------
+                            shiny::fluidRow(
+                                shiny::titlePanel(
+                                    shiny::h3("Plot", align = "center")
+                                ),
+                                shiny::plotOutput("plot")
+                            ),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                ),
+                shiny::tabPanel(
+                    title = "Simulation study: convergence checks",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            # Simulation study Convergence: Description --------
+                            shiny::titlePanel(
+                                shiny::h3("Trace plots fo convergence", align = "center")
+                            ),
+                            shiny::tabsetPanel(
+                                type = "tabs",
+                                shiny::tabPanel(
+                                    title = "Introduction",
+                                    "Coming Soon"
+                                ),
+                                shiny::tabPanel(
+                                    title = "1. Setup",
+                                    "Coming Soon"
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::fluidRow(
+                                # Simulation study Convergence: Input ----------
+                                shiny::titlePanel(
+                                    shiny::h3("Inputs", align = "center")
+                                ),
+                                column(
+                                    4,
+                                    selectInput("conv_sim_method",
+                                        "Imputation method:",
+                                        choices = c("MIMI", "MIOP", "MIOR", "aux", "vbv"),
+                                        selected = "MIMI"
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    selectInput(
+                                        inputId = "conv_sim_var",
+                                        label = "Variable",
+                                        choices = rownames(dataMids$sim[[1]]$chainMean[, , 1]),
+                                        selected = rownames(dataMids$sim[[1]]$chainMean[, , 1])[1]
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    shinyWidgets::sliderTextInput(
+                                        inputId = "conv_sim_iters",
+                                        label = "Iteration range",
+                                        hide_min_max = TRUE,
+                                        choices = 0:100,
+                                        selected = c(0, 25),
+                                        grid = FALSE
+                                    ),
+                                )
+                            ),
+                            shiny::fluidRow(
+                                # Simulation study Convergence: Output ---------
+                                shiny::titlePanel(
+                                    shiny::h3("Plot", align = "center")
+                                ),
+                                shiny::plotOutput("mids_sim_plot")
+                            ),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                ),
+                shiny::tabPanel(
+                    title = "Case study",
+                    "Coming soon"
+                ),
+                shiny::tabPanel(
+                    title = "Case study: convergence checks",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            # Case study convergence: description --------------
+                            shiny::titlePanel(
+                                shiny::h3("Trace plots fo convergence", align = "center")
+                            ),
+                            shiny::tabsetPanel(
+                                type = "tabs",
+                                shiny::tabPanel(
+                                    title = "Introduction",
+                                    "Coming Soon"
+                                ),
+                                shiny::tabPanel(
+                                    title = "1. Setup",
+                                    "Coming Soon"
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::fluidRow(
+                                # Case study convergence: inputs ----------
+                                shiny::titlePanel(
+                                    shiny::h3("Inputs", align = "center")
+                                ),
+                                column(
+                                    4,
+                                    selectInput("conv_case_method",
+                                        "Imputation method:",
+                                        choices = c("expert", "si4auxall", "pcraux", "vbv", "default"),
+                                        selected = "expert"
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    selectInput(
+                                        inputId = "conv_case_var",
+                                        label = "Variable",
+                                        choices = rownames(dataMids$fdd[[1]]$chainMean[, , 1]),
+                                        selected = rownames(dataMids$fdd[[1]]$chainMean[, , 1])[1]
+                                    ),
+                                ),
+                                column(
+                                    4,
+                                    shinyWidgets::sliderTextInput(
+                                        inputId = "conv_case_iters",
+                                        label = "Iteration range",
+                                        hide_min_max = TRUE,
+                                        choices = 0:100,
+                                        selected = c(0, 25),
+                                        grid = FALSE
+                                    ),
+                                )
+                            ),
+                            shiny::fluidRow(
+                                # Case study convergence: output ---------------
+                                shiny::titlePanel(
+                                    shiny::h3("Plot", align = "center")
+                                ),
+                                shiny::plotOutput("mids_case_plot")
+                            ),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                )
+            )
+        )
     )
 
     # Server -------------------------------------------------------------------
@@ -147,7 +335,8 @@ plotResults <- function() {
             }
         })
 
-        # Plot
+        # Simulation study plot ------------------------------------------------
+
         output$plot <- renderPlot(res = 96, height = 500, {
             dataResults %>%
                 filter(
@@ -195,146 +384,18 @@ plotResults <- function() {
                     y = input$plot_y_axis
                 )
         })
-    }
 
-    # Run app ------------------------------------------------------------------
+        # Simulation study traceplots ------------------------------------------
 
-    shinyApp(ui, server)
-
-}
-
-#' plotMids
-#'
-#' Starts a Shiny app to check trace plots for multiple imputation convergence for the \href{https://github.com/EdoardoCostantini/mi-spcr}{mi-spcr} project.
-#' @param study. A unit character vector taking value "sim" or "fdd" (simulation study and case study, respectively)
-#' @details
-#' The interface of the Shiny app allows you to change the values of the following simulation study experimental factors:
-#'
-#' - Missing data treatment used (see names in the interface):.cols
-#' 
-#'      - for the simulation study:
-#'
-#'          - MIMI: mice with minimal missing data models (only variables under imputation used as predictors in the imputation models)
-#'          - MIOP: mice using the quickpred function from the R package mice (Van Buuren and Groothuis-Oudshoorn, 2011) to select the predictors for the univariate imputation models via the correlation-based threshold
-#'          - MIOR: mice with oracle knowledge on which predictors to use (the univariate imputation models included the other variables under imputation and the predictors that were used to impose missingness)
-#'          - aux: mi-pca using pca only on auxiliary variables
-#'          - vbv: mi-pca using pca only on a variable-by-variable basis
-#'          - all: mi-pca using pca on all data, after a round of single imputation
-#' 
-#'      - for the case study:
-#' 
-#'          - expert: mice specified by an expert
-#'          - si4auxall: convergence check for single imputation used for pre-processing for mi-pca-all
-#'          - pcraux: mi-pca using pca only on auxiliary variables
-#'          - vbv: mi-pca using pca only on a variable-by-variable basis
-#'          - default: mice specified with default arguments
-#'
-#' - Imputed variable
-#' - Number of iterations used
-#'
-#' @export
-#' @import shiny
-#' @import shinybrowser
-#' @import dplyr
-#' @import ggplot2
-#' @import shinyWidgets
-#' @import pkgload
-#' @import mice
-#' @import lattice
-#' @return Shiny app UI.
-#'
-plotMids <- function(study = c("sim", "fdd")[1]) {
-
-    if (study == "sim") {
-        mids_interest <- dataMids$sim
-
-        # Method names
-        methods <- c("MIMI", "MIOP", "MIOR", "aux", "vbv")
-
-        # Plot tag
-        plot_tag <- " for the simulation study"
-    }
-    if (study == "fdd") {
-        mids_interest <- dataMids$fdd
-
-        # Method names
-        methods <- c("expert", "si4auxall", "pcraux", "vbv", "default")
-
-        # Plot tag
-        plot_tag <- " for the fireworks disaster study"
-    }
-
-    # UI -----------------------------------------------------------------------
-
-    ui <- fluidPage(
-        h1(paste0(" Trace plots for convergence checks", plot_tag)),
-        fluidRow(
-
-            # Missing data treatments ------------------------------------------
-            column(
-                3,
-                hr(),
-                selectInput("method",
-                    "Imputation method:",
-                    choices = methods,
-                    selected = methods[1]
-                ),
-            ),
-
-            # Number of pcs ----------------------------------------------------
-
-            column(
-                3,
-                hr(),
-                selectInput(
-                    inputId = "var",
-                    label = "Variable",
-                    choices = rownames(mids_interest[[1]]$chainMean[,,1]),
-                    selected = rownames(mids_interest[[1]]$chainMean[, , 1])[1]
-                ),
-            ),
-
-            # Number of iterations ---------------------------------------------
-
-            column(
-                3,
-                hr(),
-                shinyWidgets::sliderTextInput(
-                    inputId = "iters",
-                    label = "Iteration range",
-                    hide_min_max = TRUE,
-                    choices = 0:100,
-                    selected = c(0, 25),
-                    grid = FALSE
-                ),
-            ),
-        ),
-        hr(),
-        plotOutput("plot"),
-
-        # Silent extraction of size
-        shinybrowser::detect(),
-    )
-
-    # Server -------------------------------------------------------------------
-
-    server <- function(input, output, session) {
-
-        output$plot <- renderPlot(
+        output$mids_sim_plot <- renderPlot(
             res = 96,
             height = 750,
             {
-                # Define condition to plot based on inputs
-                if (study == "sim") {
-                    cnd_id <- grep(input$method, names(mids_interest))
-                    # cnd_id <- grep(methods[1], names(mids_interest))
-                }
-                if (study == "fdd") {
-                    cnd_id <- grep(input$method, names(mids_interest))
-                }
-
+                
+                cnd_id <- grep(input$conv_sim_method, names(dataMids$sim))
+                
                 # Work with simple object name
-                x <- mids_interest[[cnd_id]]
+                x <- dataMids$sim[[cnd_id]]
 
                 # Default arguments that you could change in MICE
                 type <- "l"
@@ -352,7 +413,7 @@ plotMids <- function(study = c("sim", "fdd")[1]) {
                 # select subset of non-missing entries
                 # obs <- apply(!(is.nan(mn) | is.na(mn)), 1, all)
                 # varlist <- names(obs)[obs]
-                varlist <- input$var
+                varlist <- input$conv_sim_var
                 # varlist <- "z1"
 
                 # Prepare objects for plotting
@@ -400,14 +461,101 @@ plotMids <- function(study = c("sim", "fdd")[1]) {
                         x = list(alternating = FALSE)
                     ),
                     as.table = TRUE,
-                    xlim = c(input$iters[1] - 1, input$iters[2] + 1),
+                    xlim = c(input$conv_sim_iters[1] - 1, input$conv_sim_iters[2] + 1),
                     xlab = "Iteration",
                     ylab = "",
                     strip = strip.combined,
                     par.strip.text = list(lines = 0.5),
+                    aspect = 9 / 16
                 )
             }
         )
+
+        # > Case study traceplots ----------------------------------------------
+
+        output$mids_case_plot <- renderPlot(
+            res = 96,
+            height = 750,
+            {
+                cnd_id <- grep(input$conv_case_method, names(dataMids$fdd))
+
+                # Work with simple object name
+                x <- dataMids$fdd[[cnd_id]]
+
+                # Default arguments that you could change in MICE
+                type <- "l"
+                col <- 1:10
+                lty <- 1
+                theme <- mice::mice.theme()
+                layout <- c(2, 1)
+
+                # Extract objects I need
+                mn <- x$chainMean
+                sm <- sqrt(x$chainVar)
+                m <- x$m
+                it <- x$iteration
+
+                # select subset of non-missing entries
+                # obs <- apply(!(is.nan(mn) | is.na(mn)), 1, all)
+                # varlist <- names(obs)[obs]
+                varlist <- input$conv_case_var
+                # varlist <- "z1"
+
+                # Prepare objects for plotting
+                mn <- matrix(aperm(mn[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                sm <- matrix(aperm(sm[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+                adm <- expand.grid(seq_len(it), seq_len(m), c("mean", "sd"))
+                data <- cbind(adm, rbind(mn, sm))
+                colnames(data) <- c(".it", ".m", ".ms", varlist)
+
+                # Create formula
+                formula <- as.formula(paste0(
+                    paste0(varlist, collapse = "+"),
+                    "~.it|.ms"
+                ))
+
+                # Dummy to trick R CMD check
+                .m <- NULL
+                rm(.m)
+
+                # Load function to obtain the correct plot arrangement
+                strip.combined <- function(which.given, which.panel, factor.levels, ...) {
+                    if (which.given == 1) {
+                        lattice::panel.rect(0, 0, 1, 1,
+                            col = theme$strip.background$col, border = 1
+                        )
+                        lattice::panel.text(
+                            x = 0, y = 0.5, pos = 4,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                    if (which.given == 2) {
+                        lattice::panel.text(
+                            x = 1, y = 0.5, pos = 2,
+                            lab = factor.levels[which.panel[which.given]]
+                        )
+                    }
+                }
+
+                # Make plot
+                lattice::xyplot(
+                    x = formula, data = data, groups = .m,
+                    type = type, lty = lty, col = col, layout = layout,
+                    scales = list(
+                        y = list(relation = "free"),
+                        x = list(alternating = FALSE)
+                    ),
+                    as.table = TRUE,
+                    xlim = c(input$conv_case_iters[1] - 1, input$conv_case_iters[2] + 1),
+                    xlab = "Iteration",
+                    ylab = "",
+                    strip = strip.combined,
+                    par.strip.text = list(lines = 0.5),
+                    aspect = 9/16
+                )
+            }
+        )
+
     }
 
     # Run app ------------------------------------------------------------------
