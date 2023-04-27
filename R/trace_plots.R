@@ -1,0 +1,104 @@
+#' Trace plots
+#'
+#' Generate trace plots to study convergence of imputation methods
+#'
+#' @param mids_data object containing imputation history produced by the simulation study
+#' @param method unit character vector naming the method to display
+#' @param var unit character vector naming the variable to display
+#' @param iters numeric vector containing the iteration bounds (from-to) to plot
+#' @return Returns the lattice plot
+#' @author Edoardo Costantini, 2023
+#' @examples
+#' # Define example inputs
+#' mids_data <- dataMids$sim
+#' method <- "MIMI"
+#' var <- "z1"
+#' iters <- c(0, 25)
+#' 
+#' # Use the function
+#' trace_plot(
+#'     mids_data = dataMids$sim,
+#'     method = "MIMI",
+#'     var = "z1",
+#'     iters = c(0, 100)
+#' )
+#' 
+#' @export
+trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
+    # Define the condition we are working with
+    cnd_id <- grep(method, names(mids_data))
+
+    # Extract the mids object of interest
+    x <- mids_data[[cnd_id]]
+
+    # Default arguments that you could change in MICE
+    type <- "l"
+    col <- 1:10
+    lty <- 1
+    theme <- mice::mice.theme()
+    layout <- c(2, 1)
+
+    # Extract objects I need
+    mn <- x$chainMean
+    sm <- sqrt(x$chainVar)
+    m <- x$m
+    it <- x$iteration
+
+    # Prepare objects for plotting
+    mn <- matrix(aperm(mn[var, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+    sm <- matrix(aperm(sm[var, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+    adm <- expand.grid(seq_len(it), seq_len(m), c("mean", "sd"))
+    data <- cbind(adm, rbind(mn, sm))
+    colnames(data) <- c(".it", ".m", ".ms", var)
+
+    # Create formula
+    formula <- as.formula(paste0(
+        paste0(var, collapse = "+"),
+        "~.it|.ms"
+    ))
+
+    # Dummy to trick R CMD check
+    .m <- NULL
+    rm(.m)
+
+    # Load function to obtain the correct plot arrangement
+    strip.combined <- function(which.given, which.panel, factor.levels, ...) {
+        if (which.given == 1) {
+            lattice::panel.rect(0, 0, 1, 1,
+                col = theme$strip.background$col, border = 1
+            )
+            lattice::panel.text(
+                x = 0, y = 0.5, pos = 4,
+                lab = factor.levels[which.panel[which.given]]
+            )
+        }
+        if (which.given == 2) {
+            lattice::panel.text(
+                x = 1, y = 0.5, pos = 2,
+                lab = factor.levels[which.panel[which.given]]
+            )
+        }
+    }
+
+    # Make plot
+    lattice::xyplot(
+        x = formula, 
+        data = data, 
+        groups = .m,
+        type = type, 
+        lty = lty, 
+        col = col, 
+        layout = layout,
+        scales = list(
+            y = list(relation = "free"),
+            x = list(alternating = FALSE)
+        ),
+        as.table = TRUE,
+        xlim = c(iters[1] - 1, iters[2] + 1),
+        xlab = "Iteration",
+        ylab = "",
+        strip = strip.combined,
+        par.strip.text = list(lines = 0.5),
+        aspect = 9 / 16
+    )
+}
