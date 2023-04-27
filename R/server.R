@@ -49,7 +49,7 @@ server <- function(input, output, session) {
                 mids_data = dataMids$sim,
                 method = input$conv_sim_method,
                 var = input$conv_sim_var,
-                iters = input$conv_case_iters
+                iters = input$conv_sim_iters
             )
         }
     )
@@ -64,7 +64,7 @@ server <- function(input, output, session) {
                 mids_data = dataMids$fdd,
                 method = input$conv_case_method,
                 var = input$conv_case_var,
-                iters = input$conv_sim_iters
+                iters = input$conv_case_iters
             )
         }
     )
