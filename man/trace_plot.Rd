@@ -27,6 +27,15 @@ mids_data <- dataMids$sim
 method <- "MIMI"
 var <- "z1"
 iters <- c(0, 25)
+
+# Use the function
+trace_plot(
+    mids_data = dataMids$sim,
+    method = "MIMI",
+    var = "z1",
+    iters = c(0, 100)
+)
+
 }
 \author{
 Edoardo Costantini, 2023

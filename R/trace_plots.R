@@ -14,6 +14,15 @@
 #' method <- "MIMI"
 #' var <- "z1"
 #' iters <- c(0, 25)
+#' 
+#' # Use the function
+#' trace_plot(
+#'     mids_data = dataMids$sim,
+#'     method = "MIMI",
+#'     var = "z1",
+#'     iters = c(0, 100)
+#' )
+#' 
 #' @export
 trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
     # Define the condition we are working with
