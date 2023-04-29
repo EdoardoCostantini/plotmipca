@@ -234,12 +234,6 @@ ui_call <- function() {
                                         choices = c("expert", "si4auxall", "pcraux", "vbv", "default"),
                                         selected = "expert"
                                     ),
-                                    selectInput(
-                                        inputId = "conv_case_var",
-                                        label = "Variable",
-                                        choices = rownames(dataMids$fdd[[1]]$chainMean[, , 1]),
-                                        selected = rownames(dataMids$fdd[[1]]$chainMean[, , 1])[1]
-                                    ),
                                     shinyWidgets::sliderTextInput(
                                         inputId = "conv_case_iters",
                                         label = "Iteration range",
