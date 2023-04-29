@@ -130,7 +130,7 @@ ui_call <- function() {
                             width = 3,
                             # Simulation study Convergence: Description --------
                             shiny::titlePanel(
-                                shiny::h3("Trace plots fo convergence", align = "center")
+                                shiny::h3("Simulation study: convergence checks", align = "center")
                             ),
                             shiny::tabsetPanel(
                                 type = "tabs",
@@ -202,7 +202,7 @@ ui_call <- function() {
                             width = 3,
                             # Case study convergence: description --------------
                             shiny::titlePanel(
-                                shiny::h3("Trace plots fo convergence", align = "center")
+                                shiny::h3("Case study: convergence checks", align = "center")
                             ),
                             shiny::tabsetPanel(
                                 type = "tabs",
