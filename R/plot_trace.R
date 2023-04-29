@@ -10,21 +10,21 @@
 #' @author Edoardo Costantini, 2023
 #' @examples
 #' # Define example inputs
-#' mids_data <- dataMids$sim
-#' method <- "MIMI"
-#' var <- "z1"
+#' mids_data <- mids_case
+#' method <- "expert"
+#' layout <- c(2, 3)
 #' iters <- c(0, 25)
 #' 
 #' # Use the function
-#' trace_plot(
-#'     mids_data = dataMids$sim,
+#' plot_trace(
+#'     mids_data = mids_sim,
 #'     method = "MIMI",
-#'     var = "z1",
+#'     layout <- c(2, 4),
 #'     iters = c(0, 100)
 #' )
 #' 
 #' @export
-trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
+plot_trace <- function(mids_data, method, iters = c(0, 25), layout = c(2, 1)) {
     # Define the condition we are working with
     cnd_id <- grep(method, names(mids_data))
 
@@ -36,7 +36,6 @@ trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
     col <- 1:10
     lty <- 1
     theme <- mice::mice.theme()
-    layout <- c(2, 1)
 
     # Extract objects I need
     mn <- x$chainMean
@@ -44,16 +43,20 @@ trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
     m <- x$m
     it <- x$iteration
 
+    # select subset of non-missing entries
+    obs <- apply(!(is.nan(mn) | is.na(mn)), 1, all)
+    varlist <- names(obs)[obs]
+
     # Prepare objects for plotting
-    mn <- matrix(aperm(mn[var, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
-    sm <- matrix(aperm(sm[var, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+    mn <- matrix(aperm(mn[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
+    sm <- matrix(aperm(sm[varlist, , , drop = FALSE], c(2, 3, 1)), nrow = m * it)
     adm <- expand.grid(seq_len(it), seq_len(m), c("mean", "sd"))
     data <- cbind(adm, rbind(mn, sm))
-    colnames(data) <- c(".it", ".m", ".ms", var)
+    colnames(data) <- c(".it", ".m", ".ms", varlist)
 
     # Create formula
     formula <- as.formula(paste0(
-        paste0(var, collapse = "+"),
+        paste0(varlist, collapse = "+"),
         "~.it|.ms"
     ))
 
@@ -82,12 +85,12 @@ trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
 
     # Make plot
     lattice::xyplot(
-        x = formula, 
-        data = data, 
+        x = formula,
+        data = data,
         groups = .m,
-        type = type, 
-        lty = lty, 
-        col = col, 
+        type = type,
+        lty = lty,
+        col = col,
         layout = layout,
         scales = list(
             y = list(relation = "free"),
@@ -100,4 +103,5 @@ trace_plot <- function(mids_data, method, var, iters = c(0, 25)) {
         strip = strip.combined,
         par.strip.text = list(lines = 0.5)
     )
+
 }

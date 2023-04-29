@@ -43,13 +43,25 @@ server <- function(input, output, session) {
 
     output$mids_sim_plot <- renderPlot(
         res = 96,
+        height = 725,
+        {
+            plot_trace(
+                mids_data = mids_sim,
+                method = input$conv_sim_method,
+                layout = c(2, 4),
+                iters = input$conv_sim_iters
+            )
+        }
+    )
+
+    # > Case study: results ----------------------------------------------------
+    output$case_plot_res <- renderPlot(
+        res = 96,
         height = 425,
         {
-            trace_plot(
-                mids_data = dataMids$sim,
-                method = input$conv_sim_method,
-                var = input$conv_sim_var,
-                iters = input$conv_sim_iters
+            plot_case(
+                results = dataFdd,
+                y = input$res_case_dv
             )
         }
     )
@@ -58,12 +70,12 @@ server <- function(input, output, session) {
 
     output$mids_case_plot <- renderPlot(
         res = 96,
-        height = 425,
+        height = 725,
         {
-            trace_plot(
-                mids_data = dataMids$fdd,
+            plot_trace(
+                mids_data = mids_case,
                 method = input$conv_case_method,
-                var = input$conv_case_var,
+                layout = c(2, 6),
                 iters = input$conv_case_iters
             )
         }

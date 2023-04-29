@@ -128,48 +128,18 @@ ui_call <- function() {
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
-                            # Simulation study Convergence: Description --------
-                            shiny::titlePanel(
-                                shiny::h3("Simulation study: convergence checks", align = "center")
+                            shiny::HTML(
+                                "<br>
+                                This tab allows you to interact with the trace plots for the imputation methods used in the simulation study.
+                                <br>
+                                <br>
+                                "
                             ),
-                            shiny::tabsetPanel(
-                                type = "tabs",
-                                shiny::tabPanel(
-                                    title = "Introduction",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "1. Setup",
-                                    "Coming Soon"
-                                )
-                            )
-                        ),
-                        shiny::column(
-                            width = 9,
-                            shiny::fluidRow(
-                                # Simulation study Convergence: Input ----------
-                                shiny::titlePanel(
-                                    shiny::h3("Inputs", align = "center")
-                                ),
-                                column(
-                                    4,
-                                    selectInput("conv_sim_method",
+                            selectInput("conv_sim_method",
                                         "Imputation method:",
-                                        choices = c("MIMI", "MIOP", "MIOR", "aux", "vbv"),
-                                        selected = "MIMI"
+                                        choices = c("MI-PCA-AUX", "MI-PCA-VBV", "MI-MI", "MI-OP", "MI-OR"),
+                                        selected = "MI-PCA-AUX"
                                     ),
-                                ),
-                                column(
-                                    4,
-                                    selectInput(
-                                        inputId = "conv_sim_var",
-                                        label = "Variable",
-                                        choices = rownames(dataMids$sim[[1]]$chainMean[, , 1]),
-                                        selected = rownames(dataMids$sim[[1]]$chainMean[, , 1])[1]
-                                    ),
-                                ),
-                                column(
-                                    4,
                                     shinyWidgets::sliderTextInput(
                                         inputId = "conv_sim_iters",
                                         label = "Iteration range",
@@ -177,23 +147,39 @@ ui_call <- function() {
                                         choices = 0:100,
                                         selected = c(0, 25),
                                         grid = FALSE
-                                    ),
-                                )
-                            ),
-                            shiny::fluidRow(
-                                # Simulation study Convergence: Output ---------
-                                shiny::titlePanel(
-                                    shiny::h3("Plot", align = "center")
-                                ),
-                                shiny::plotOutput("mids_sim_plot")
-                            ),
+                                    )
+                        ),
+                        shiny::column(
+                            width = 9,
+                                shiny::plotOutput("mids_sim_plot"),
                             style = "border-left: 1px solid; border-left-color: #DDDDDD"
                         )
                     )
                 ),
                 shiny::tabPanel(
                     title = "Case study",
-                    "Coming soon"
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            shiny::HTML(
+                                "<br>
+                                This tab allows you to plot the results of the case study reported in the article.
+                                <br>
+                                <br>
+                                "
+                            ),
+                            selectInput("res_case_dv",
+                                "Dependent variable",
+                                choices = c("PTSD-RI parent score", "PTSD-RI children score"),
+                                selected = "PTSD-RI parent score"
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::plotOutput("case_plot_res"),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
                 ),
                 shiny::tabPanel(
                     title = "Case study: convergence checks",
@@ -201,47 +187,18 @@ ui_call <- function() {
                         shiny::column(
                             width = 3,
                             # Case study convergence: description --------------
-                            shiny::titlePanel(
-                                shiny::h3("Case study: convergence checks", align = "center")
+                            shiny::HTML(
+                                "<br>
+                                This tab allows you to interact with the trace plots for the imputation methods used in the case study.
+                                <br>
+                                <br>
+                                "
                             ),
-                            shiny::tabsetPanel(
-                                type = "tabs",
-                                shiny::tabPanel(
-                                    title = "Introduction",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "1. Setup",
-                                    "Coming Soon"
-                                )
-                            )
-                        ),
-                        shiny::column(
-                            width = 9,
-                            shiny::fluidRow(
-                                # Case study convergence: inputs ----------
-                                shiny::titlePanel(
-                                    shiny::h3("Inputs", align = "center")
-                                ),
-                                column(
-                                    4,
                                     selectInput("conv_case_method",
                                         "Imputation method:",
-                                        choices = c("expert", "si4auxall", "pcraux", "vbv", "default"),
-                                        selected = "expert"
+                                        choices = c("MI-PCA-AUX", "MI-PCA-VBV", "SI-PCA-ALL", "Default", "Expert"),
+                                        selected = "MI-PCA-AUX"
                                     ),
-                                ),
-                                column(
-                                    4,
-                                    selectInput(
-                                        inputId = "conv_case_var",
-                                        label = "Variable",
-                                        choices = rownames(dataMids$fdd[[1]]$chainMean[, , 1]),
-                                        selected = rownames(dataMids$fdd[[1]]$chainMean[, , 1])[1]
-                                    ),
-                                ),
-                                column(
-                                    4,
                                     shinyWidgets::sliderTextInput(
                                         inputId = "conv_case_iters",
                                         label = "Iteration range",
@@ -250,15 +207,10 @@ ui_call <- function() {
                                         selected = c(0, 25),
                                         grid = FALSE
                                     ),
-                                )
-                            ),
-                            shiny::fluidRow(
-                                # Case study convergence: output ---------------
-                                shiny::titlePanel(
-                                    shiny::h3("Plot", align = "center")
-                                ),
-                                shiny::plotOutput("mids_case_plot")
-                            ),
+                        ),
+                        shiny::column(
+                            width = 9,
+                                shiny::plotOutput("mids_case_plot"),
                             style = "border-left: 1px solid; border-left-color: #DDDDDD"
                         )
                     )
