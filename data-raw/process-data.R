@@ -7,7 +7,8 @@
 
 # Load data --------------------------------------------------------------------
 
-dataFdd <- readRDS("./data/dataFdd.rds")
+# results for FDD
+dataFdd <- readRDS("./data-raw/20211220_144954_res.rds")
 
 # Case study: results ----------------------------------------------------------
 
