@@ -23,14 +23,14 @@ Generate trace plots to study convergence of imputation methods
 }
 \examples{
 # Define example inputs
-mids_data <- dataMids$sim
+mids_data <- mids_sim
 method <- "MIMI"
 layout <- c(2, 3)
 iters <- c(0, 25)
 
 # Use the function
 plot_trace(
-    mids_data = dataMids$sim,
+    mids_data = mids_sim,
     method = "MIMI",
     layout <- c(2, 4),
     iters = c(0, 100)

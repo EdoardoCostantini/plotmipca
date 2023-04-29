@@ -46,7 +46,7 @@ server <- function(input, output, session) {
         height = 725,
         {
             plot_trace(
-                mids_data = dataMids$sim,
+                mids_data = mids_sim,
                 method = input$conv_sim_method,
                 layout = c(2, 4),
                 iters = input$conv_sim_iters
@@ -73,7 +73,7 @@ server <- function(input, output, session) {
         height = 725,
         {
             plot_trace(
-                mids_data = dataMids$fdd,
+                mids_data = mids_case,
                 method = input$conv_case_method,
                 layout = c(2, 6),
                 iters = input$conv_case_iters
