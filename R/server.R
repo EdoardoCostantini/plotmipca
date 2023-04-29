@@ -43,7 +43,7 @@ server <- function(input, output, session) {
 
     output$mids_sim_plot <- renderPlot(
         res = 96,
-        height = 425,
+        height = 725,
         {
             plot_trace(
                 mids_data = dataMids$sim,
