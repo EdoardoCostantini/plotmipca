@@ -193,7 +193,28 @@ ui_call <- function() {
                 ),
                 shiny::tabPanel(
                     title = "Case study",
-                    "Coming soon"
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            shiny::HTML(
+                                "<br>
+                                This tab allows you to plot the results of the case study reported in the article.
+                                <br>
+                                <br>
+                                "
+                            ),
+                            selectInput("res_case_dv",
+                                "Dependent variable",
+                                choices = c("PTSD-RI parent score", "PTSD-RI children score"),
+                                selected = "PTSD-RI parent score"
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::plotOutput("case_plot_res"),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
                 ),
                 shiny::tabPanel(
                     title = "Case study: convergence checks",

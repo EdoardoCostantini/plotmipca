@@ -54,6 +54,18 @@ server <- function(input, output, session) {
         }
     )
 
+    # > Case study: results ----------------------------------------------------
+    output$case_plot_res <- renderPlot(
+        res = 96,
+        height = 425,
+        {
+            plot_case(
+                results = dataFdd,
+                y = input$res_case_dv
+            )
+        }
+    )
+
     # > Case study traceplots ----------------------------------------------
 
     output$mids_case_plot <- renderPlot(
