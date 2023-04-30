@@ -48,24 +48,10 @@ To start the shiny apps and interact with the plots, open an R session and load 
 library("plotmipca")
 ```
 
-### Simulation study results
-
-When you run the following R function:
+Then, run the following command in the R console:
 
 ```
-plotmipca::plotResults()
+start_app()
 ```
 
-a shiny app is started that allows you to plot the results of the simulation study.
-The help file shows how to use and read the plots produced by the app.
-
-### Convergence plots
-
-When you run the following R function:
-
-```
-plotmipca::plotMids()
-```
-
-a shiny app is started that allows you to study the trace plots for MI imputation algorithms used in the simulation study.
-The help file shows how to use and read the plots produced by the app.
+The app interface will explain how to interact with it.
