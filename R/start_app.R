@@ -1,10 +1,3 @@
-# Project:   plotmipca
-# Objective: Function to run app
-# Author:    Edoardo Costantini
-# Created:   2022-12-02
-# Modified:  2023-04-27
-# Notes:
-
 #' start_app
 #'
 #' Starts a Shiny app to interact with the results of the \href{https://github.com/EdoardoCostantini/mi-pca}{mi-pca} project.
