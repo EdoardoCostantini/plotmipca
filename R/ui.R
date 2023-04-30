@@ -22,7 +22,32 @@ ui_call <- function() {
             # Create tabs for different plotting aspects
             shiny::tabsetPanel(
                 type = "tabs",
-                selected = "Module 1: Simulation study",
+                selected = "About this Shiny app",
+                shiny::tabPanel(
+                    title = "About this Shiny app",
+                    column(
+                        width = 8,
+                        offset = 2,
+                    shiny::HTML(
+                        "<br>
+                            This Shiny app accompanies the paper:
+                            <br>
+                            <br>
+                            <a href='https://arxiv.org/abs/2206.15107'>Costantini, E., Lang, K. M., Sijtsma, K., & Reeskens, T. (2022). Solving the 'many variables' problem in MICE with principal component regression. <i>arXiv preprint arXiv:2206.15107</i>.</a>
+                            <br>
+                            <br>
+                            With this app, the user can:
+                            <ul>
+                                <li>Interact with the simulation study results presented in the paper by using <b>Module 1</b>.</li>
+                                <li>Interact with the case study results presented in the paper by using <b>Module 2</b>.</li>
+                                <li>Interact with trace plots showing the convergence of the methods compared in the simulation study by using <b>Module 3</b>.</li>
+                                <li>Interact with trace plots showing the convergence of the methods compared in the case study by using <b>Module 4</b>.</li>
+                            </ul>
+                            For questions and feedback, feel free to <a href = 'mailto:e.costantini@tilburguniversity.edu'>send me an email</a>.
+                            "
+                    )
+                    )
+                ),
                 shiny::tabPanel(
                     title = "Module 1: Simulation study",
                     shiny::fluidRow(
@@ -31,7 +56,7 @@ ui_call <- function() {
                             # Simulation study: Description --------------------
                             shiny::HTML(
                                 "<br>
-                                    This tab allows you to plot the results of the simulation study.
+                                    This tab allows you to plot the results of the simulation study reported in the article.
                                     You change the values of the experimental factors to plot the results you are most interested in.
                                     <br>
                                     <br>"
