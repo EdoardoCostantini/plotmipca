@@ -136,22 +136,22 @@ ui_call <- function() {
                                 "
                             ),
                             selectInput("conv_sim_method",
-                                        "Imputation method:",
-                                        choices = c("MI-PCA-AUX", "MI-PCA-VBV", "MI-MI", "MI-OP", "MI-OR"),
-                                        selected = "MI-PCA-AUX"
-                                    ),
-                                    shinyWidgets::sliderTextInput(
-                                        inputId = "conv_sim_iters",
-                                        label = "Iteration range",
-                                        hide_min_max = TRUE,
-                                        choices = 0:100,
-                                        selected = c(0, 25),
-                                        grid = FALSE
-                                    )
+                                "Imputation method:",
+                                choices = c("MI-PCA-AUX", "MI-PCA-VBV", "MI-MI", "MI-OP", "MI-OR"),
+                                selected = "MI-PCA-AUX"
+                            ),
+                            shinyWidgets::sliderTextInput(
+                                inputId = "conv_sim_iters",
+                                label = "Iteration range",
+                                hide_min_max = TRUE,
+                                choices = 0:100,
+                                selected = c(0, 25),
+                                grid = FALSE
+                            )
                         ),
                         shiny::column(
                             width = 9,
-                                shiny::plotOutput("mids_sim_plot"),
+                            shiny::plotOutput("mids_sim_plot"),
                             style = "border-left: 1px solid; border-left-color: #DDDDDD"
                         )
                     )
@@ -194,23 +194,23 @@ ui_call <- function() {
                                 <br>
                                 "
                             ),
-                                    selectInput("conv_case_method",
-                                        "Imputation method:",
-                                        choices = c("MI-PCA-AUX", "MI-PCA-VBV", "SI-PCA-ALL", "Default", "Expert"),
-                                        selected = "MI-PCA-AUX"
-                                    ),
-                                    shinyWidgets::sliderTextInput(
-                                        inputId = "conv_case_iters",
-                                        label = "Iteration range",
-                                        hide_min_max = TRUE,
-                                        choices = 0:100,
-                                        selected = c(0, 25),
-                                        grid = FALSE
-                                    ),
+                            selectInput("conv_case_method",
+                                "Imputation method:",
+                                choices = c("MI-PCA-AUX", "MI-PCA-VBV", "SI-PCA-ALL", "Default", "Expert"),
+                                selected = "MI-PCA-AUX"
+                            ),
+                            shinyWidgets::sliderTextInput(
+                                inputId = "conv_case_iters",
+                                label = "Iteration range",
+                                hide_min_max = TRUE,
+                                choices = 0:100,
+                                selected = c(0, 25),
+                                grid = FALSE
+                            ),
                         ),
                         shiny::column(
                             width = 9,
-                                shiny::plotOutput("mids_case_plot"),
+                            shiny::plotOutput("mids_case_plot"),
                             style = "border-left: 1px solid; border-left-color: #DDDDDD"
                         )
                     )
