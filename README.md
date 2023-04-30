@@ -51,7 +51,7 @@ library("plotmipca")
 Then, run the following command in the R console:
 
 ```
-plotmipca::start_app()
+start_app()
 ```
 
 The app interface will explain how to interact with it.
