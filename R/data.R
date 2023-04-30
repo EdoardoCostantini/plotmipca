@@ -2,7 +2,7 @@
 # Objective: container for data documentation
 # Author:    Edoardo Costantini
 # Created:   2022-12-17
-# Modified:  2022-12-17
+# Modified:  2023-04-30
 
 #' dataResults
 #'
@@ -40,13 +40,24 @@
 #' @format A data frame with 12108 rows and 21 columns
 NULL
 
-#' dataMids
+#' mids_sim
 #'
 #' A list of (simplified) mids objects and condition descriptions used to obtain the trace plots for desired conditions.
 #'
 #' @docType data
 #' @keywords datasets
-#' @name dataMids
-#' @usage data(dataMids)
-#' @format A list containing simplified mids for (1) the simulation study and (2) the data application
+#' @name mids_sim
+#' @usage data(mids_sim)
+#' @format A list containing simplified mids for the simulation study
+NULL
+
+#' mids_case
+#'
+#' A list of (simplified) mids objects and condition descriptions used to obtain the trace plots for desired conditions.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name mids_case
+#' @usage data(mids_case)
+#' @format A list containing simplified mids for the case study
 NULL

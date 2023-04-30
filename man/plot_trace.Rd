@@ -23,8 +23,8 @@ Generate trace plots to study convergence of imputation methods
 }
 \examples{
 # Define example inputs
-mids_data <- mids_sim
-method <- "MIMI"
+mids_data <- mids_case
+method <- "expert"
 layout <- c(2, 3)
 iters <- c(0, 25)
 
