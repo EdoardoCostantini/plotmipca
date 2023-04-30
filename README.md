@@ -12,7 +12,7 @@ You can interact with the results from the study [mi-pca](<https://github.com/Ed
         devtools::install_github("https://github.com/EdoardoCostantini/plotmipca")
         ```
     - Install from Zenodo version
-        - Go to the [Zenodo page](https://doi.org/10.5281/zenodo.7452124)
+        - Go to the [Zenodo page](https://doi.org/10.5281/zenodo.7879867)
         - Dowload the `.zip` archive
         - Unzip the folder if necessary
         - Open an R session and make sure to have the following dependencies installed:
