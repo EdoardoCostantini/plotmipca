@@ -22,9 +22,9 @@ ui_call <- function() {
             # Create tabs for different plotting aspects
             shiny::tabsetPanel(
                 type = "tabs",
-                selected = "Simulation study",
+                selected = "Module 1: Simulation study",
                 shiny::tabPanel(
-                    title = "Simulation study",
+                    title = "Module 1: Simulation study",
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
@@ -105,7 +105,32 @@ ui_call <- function() {
                     )
                 ),
                 shiny::tabPanel(
-                    title = "Simulation study: convergence checks",
+                    title = "Module 2: Case study",
+                    shiny::fluidRow(
+                        shiny::column(
+                            width = 3,
+                            shiny::HTML(
+                                "<br>
+                                This tab allows you to plot the results of the case study reported in the article.
+                                <br>
+                                <br>
+                                "
+                            ),
+                            selectInput("res_case_dv",
+                                "Dependent variable",
+                                choices = c("PTSD-RI parent score", "PTSD-RI children score"),
+                                selected = "PTSD-RI parent score"
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::plotOutput("case_plot_res"),
+                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
+                        )
+                    )
+                ),
+                shiny::tabPanel(
+                    title = "Module 3: Simulation study convergence",
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
@@ -138,32 +163,7 @@ ui_call <- function() {
                     )
                 ),
                 shiny::tabPanel(
-                    title = "Case study",
-                    shiny::fluidRow(
-                        shiny::column(
-                            width = 3,
-                            shiny::HTML(
-                                "<br>
-                                This tab allows you to plot the results of the case study reported in the article.
-                                <br>
-                                <br>
-                                "
-                            ),
-                            selectInput("res_case_dv",
-                                "Dependent variable",
-                                choices = c("PTSD-RI parent score", "PTSD-RI children score"),
-                                selected = "PTSD-RI parent score"
-                            )
-                        ),
-                        shiny::column(
-                            width = 9,
-                            shiny::plotOutput("case_plot_res"),
-                            style = "border-left: 1px solid; border-left-color: #DDDDDD"
-                        )
-                    )
-                ),
-                shiny::tabPanel(
-                    title = "Case study: convergence checks",
+                    title = "Module 4: Case study convergence",
                     shiny::fluidRow(
                         shiny::column(
                             width = 3,
