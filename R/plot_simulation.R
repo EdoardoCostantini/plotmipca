@@ -23,7 +23,7 @@
 #' categories <- levels(dataResults$K)[c(1, 3, 5)]
 #' prop_noise <- unique(dataResults$pj)[c(1, 4)]
 #' outcome <- c("bias", "CIC", "CIW", "mcsd")[1]
-#' 
+#'
 #' # Use the function
 #' plot_simulation(
 #'     results = dataResults,
@@ -36,13 +36,12 @@
 #'     prop_noise = unique(dataResults$pj)[c(1, 4)],
 #'     outcome = c("bias", "CIC", "CIW", "mcsd")[1]
 #' )
-#' 
+#'
 #' @export
 plot_simulation <- function(results, n_items, parameter, latent_structure, method_vector, npc_range, categories, prop_noise, outcome) {
-
     # Filter the data as requested
     results_filtered <- results %>%
-        filter(
+        dplyr::filter(
             j == n_items,
             par == parameter,
             lv == latent_structure,
@@ -54,41 +53,46 @@ plot_simulation <- function(results, n_items, parameter, latent_structure, metho
         )
 
     # Make NPCs a factors
-    results_ready <- results_filtered %>% 
-        mutate(npc = factor(npc))
-        
+    results_ready <- results_filtered %>%
+        dplyr::mutate(npc = factor(npc))
+
     # Make plot
     results_ready %>%
-        ggplot(aes_string(
-            x = "K",
-            y = outcome,
-            group = "npc",
-            fill = "NPC"
-        )) +
-        geom_bar(
+        ggplot2::ggplot(
+            ggplot2::aes_string(
+                x = "K",
+                y = outcome,
+                group = "npc",
+                fill = "NPC"
+            )
+        ) +
+        ggplot2::geom_bar(
             stat = "identity",
             position = "dodge",
             colour = "black",
             size = .25
         ) +
-        scale_fill_manual(
-            values = c(gray.colors(2, start = 0.5, end = 0.8), "white")
+        ggplot2::scale_fill_manual(
+            values = c(grDevices::gray.colors(2, start = 0.5, end = 0.8), "white")
         ) +
-        facet_grid(reformulate("method", "pj"),
-            labeller = labeller(.rows = label_both, .cols = label_value),
+        ggplot2::facet_grid(reformulate("method", "pj"),
+            labeller = ggplot2::labeller(
+                .rows = ggplot2::label_both, 
+                .cols = ggplot2::label_value
+                ),
             scales = "free",
             switch = "y"
         ) +
-        theme(
+        ggplot2::theme(
             # Text
-            text = element_text(size = 12),
-            strip.text.y.right = element_text(angle = 0),
+            text = ggplot2::element_text(size = 12),
+            strip.text.y.right = ggplot2::element_text(angle = 0),
             # Legend
             legend.position = "right",
             # Backgorund
-            panel.background = element_rect(fill = NA, color = "gray")
+            panel.background = ggplot2::element_rect(fill = NA, color = "gray")
         ) +
-        labs(
+        ggplot2::labs(
             x = "K",
             y = outcome
         )

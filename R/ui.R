@@ -25,7 +25,7 @@ ui_call <- function() {
                 selected = "About this Shiny app",
                 shiny::tabPanel(
                     title = "About this Shiny app",
-                    column(
+                    shiny::column(
                         width = 8,
                         offset = 2,
                     shiny::HTML(
@@ -65,25 +65,25 @@ ui_call <- function() {
                                 widths = c(11, 12),
                                 shiny::tabPanel(
                                     title = "1. Data generation",
-                                    radioButtons("j",
+                                    shiny::radioButtons("j",
                                         "Number of observed items",
                                         choices = unique(dataResults$j),
                                         selected = unique(dataResults$j)[1],
                                         inline = TRUE
                                     ),
-                                    radioButtons("lv",
+                                    shiny::radioButtons("lv",
                                         "Latent structure",
                                         choices = rev(unique(dataResults$lv)),
                                         selected = TRUE,
                                         inline = TRUE
                                     ),
-                                    checkboxGroupInput("K",
+                                    shiny::checkboxGroupInput("K",
                                         "Discrete levels",
                                         inline = TRUE,
                                         choices = levels(dataResults$K),
                                         selected = levels(dataResults$K)[c(1, 3, 5)]
                                     ),
-                                    checkboxGroupInput("pj",
+                                    shiny::checkboxGroupInput("pj",
                                         "Proportion of noise variables",
                                         inline = TRUE,
                                         choices = unique(dataResults$pj),
@@ -92,7 +92,7 @@ ui_call <- function() {
                                 ),
                                 shiny::tabPanel(
                                     title = "2. Missing data treatments",
-                                    checkboxGroupInput("method",
+                                    shiny::checkboxGroupInput("method",
                                         "Methods",
                                         choices = levels(dataResults$method),
                                         selected = levels(dataResults$method)[c(1, 3:5, 8)],
@@ -109,12 +109,12 @@ ui_call <- function() {
                                 ),
                                 shiny::tabPanel(
                                     title = "3. Simulation outcomes",
-                                    selectInput("par",
+                                    shiny::selectInput("par",
                                         "Parameter",
                                         choices = levels(dataResults$par),
                                         selected = "z1 correlation z2"
                                     ),
-                                    radioButtons("plot_y_axis",
+                                    shiny::radioButtons("plot_y_axis",
                                         "Outcome measure",
                                         choices = c("bias", "CIC", "CIW", "mcsd"),
                                         inline = TRUE
@@ -141,7 +141,7 @@ ui_call <- function() {
                                 <br>
                                 "
                             ),
-                            selectInput("res_case_dv",
+                            shiny::selectInput("res_case_dv",
                                 "Dependent variable",
                                 choices = c("PTSD-RI parent score", "PTSD-RI children score"),
                                 selected = "PTSD-RI parent score"
@@ -166,7 +166,7 @@ ui_call <- function() {
                                 <br>
                                 "
                             ),
-                            selectInput("conv_sim_method",
+                            shiny::selectInput("conv_sim_method",
                                 "Imputation method:",
                                 choices = c("MI-PCA-AUX", "MI-PCA-VBV", "MI-MI", "MI-OP", "MI-OR"),
                                 selected = "MI-PCA-AUX"
@@ -200,7 +200,7 @@ ui_call <- function() {
                                 <br>
                                 "
                             ),
-                            selectInput("conv_case_method",
+                            shiny::selectInput("conv_case_method",
                                 "Imputation method:",
                                 choices = c("MI-PCA-AUX", "MI-PCA-VBV", "SI-PCA-ALL", "Default", "Expert"),
                                 selected = "MI-PCA-AUX"

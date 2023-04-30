@@ -32,18 +32,11 @@
 #' - Parameter (which statistic for which variable)
 #'
 #' @export
-#' @import shiny
-#' @import shinybrowser
 #' @import dplyr
-#' @import ggplot2
-#' @import shinyWidgets
-#' @import pkgload
-#' @import mice
-#' @import lattice
 #' @return Shiny app UI.
 #'
 start_app <- function() {
-    shinyApp(
+    shiny::shinyApp(
         ui = ui_call(),
         server = server
     )
