@@ -23,7 +23,7 @@ server <- function(input, output, session) {
 
     output$plot <- renderPlot(
         res = 96,
-        height = 425,
+        height = 725,
         {
             plot_simulation(
                 results = dataResults,
@@ -57,7 +57,7 @@ server <- function(input, output, session) {
     # > Case study: results ----------------------------------------------------
     output$case_plot_res <- renderPlot(
         res = 96,
-        height = 425,
+        height = 725,
         {
             plot_case(
                 results = dataFdd,

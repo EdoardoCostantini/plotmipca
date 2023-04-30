@@ -29,31 +29,17 @@ ui_call <- function() {
                         shiny::column(
                             width = 3,
                             # Simulation study: Description --------------------
-                            shiny::titlePanel(
-                                shiny::h3("Simulation study", align = "center")
+                            shiny::HTML(
+                                "<br>
+                                    This tab allows you to plot the results of the simulation study.
+                                    You change the values of the experimental factors to plot the results you are most interested in.
+                                    <br>
+                                    <br>"
                             ),
-                            shiny::tabsetPanel(
-                                type = "tabs",
+                            shiny::navlistPanel(
+                                widths = c(11, 12),
                                 shiny::tabPanel(
-                                    title = "Introduction",
-                                    "Coming Soon"
-                                ),
-                                shiny::tabPanel(
-                                    title = "1. Setup",
-                                    "Coming Soon"
-                                )
-                            )
-                        ),
-                        shiny::column(
-                            width = 9,
-                            # Simulation study: inputs -------------------------
-                            shiny::fluidRow(
-                                shiny::titlePanel(
-                                    shiny::h3("Inputs", align = "center")
-                                ),
-                                column(
-                                    4,
-                                    h4("Data generation"),
+                                    title = "1. Data generation",
                                     radioButtons("j",
                                         "Number of observed items",
                                         choices = unique(dataResults$j),
@@ -76,30 +62,15 @@ ui_call <- function() {
                                         "Proportion of noise variables",
                                         inline = TRUE,
                                         choices = unique(dataResults$pj),
-                                        selected = unique(dataResults$pj)[c(1, 4)]
-                                    ),
+                                        selected = unique(dataResults$pj)
+                                    )
                                 ),
-                                column(
-                                    4,
-                                    h4("Outcome measures"),
-                                    selectInput("par",
-                                        "Parameter",
-                                        choices = levels(dataResults$par),
-                                        selected = "z1 correlation z2"
-                                    ),
-                                    radioButtons("plot_y_axis",
-                                        "Outcome measure",
-                                        choices = c("bias", "CIC", "CIW", "mcsd"),
-                                        inline = TRUE
-                                    ),
-                                ),
-                                column(
-                                    4,
-                                    h4("Missing data treatments"),
+                                shiny::tabPanel(
+                                    title = "2. Missing data treatments",
                                     checkboxGroupInput("method",
                                         "Methods",
                                         choices = levels(dataResults$method),
-                                        selected = levels(dataResults$method)[c(1, 3:5)],
+                                        selected = levels(dataResults$method)[c(1, 3:5, 8)],
                                         inline = TRUE
                                     ),
                                     shinyWidgets::sliderTextInput(
@@ -109,16 +80,26 @@ ui_call <- function() {
                                         choices = sort(unique(dataResults$npc)),
                                         selected = c(0, 10),
                                         grid = TRUE
-                                    ),
-                                )
-                            ),
-                            # Simulation study: Output -------------------------
-                            shiny::fluidRow(
-                                shiny::titlePanel(
-                                    shiny::h3("Plot", align = "center")
+                                    )
                                 ),
-                                shiny::plotOutput("plot")
-                            ),
+                                shiny::tabPanel(
+                                    title = "3. Simulation outcomes",
+                                    selectInput("par",
+                                        "Parameter",
+                                        choices = levels(dataResults$par),
+                                        selected = "z1 correlation z2"
+                                    ),
+                                    radioButtons("plot_y_axis",
+                                        "Outcome measure",
+                                        choices = c("bias", "CIC", "CIW", "mcsd"),
+                                        inline = TRUE
+                                    )
+                                )
+                            )
+                        ),
+                        shiny::column(
+                            width = 9,
+                            shiny::plotOutput("plot"),
                             style = "border-left: 1px solid; border-left-color: #DDDDDD"
                         )
                     )
