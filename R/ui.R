@@ -12,7 +12,7 @@ ui_call <- function() {
         # App title
         shiny::titlePanel(
             shiny::h1(
-                'Solving the "many variables" problem in MICE with principal component regression',
+                "Solving the many variables problem in MICE with PCR",
                 align = "center"
             )
         ),
@@ -28,8 +28,8 @@ ui_call <- function() {
                     shiny::column(
                         width = 8,
                         offset = 2,
-                    shiny::HTML(
-                        "<br>
+                        shiny::HTML(
+                            "<br>
                             This Shiny app accompanies the paper:
                             <br>
                             <br>
@@ -45,7 +45,7 @@ ui_call <- function() {
                             </ul>
                             For questions and feedback, feel free to <a href = 'mailto:e.costantini@tilburguniversity.edu'>send me an email</a>.
                             "
-                    )
+                        )
                     )
                 ),
                 shiny::tabPanel(
