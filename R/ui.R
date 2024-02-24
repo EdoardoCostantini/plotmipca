@@ -67,42 +67,42 @@ ui_call <- function() {
                                     title = "1. Data generation",
                                     shiny::radioButtons("j",
                                         "Number of observed items",
-                                        choices = unique(dataResults$j),
-                                        selected = unique(dataResults$j)[1],
+                                        choices = unique(plotmipca::dataResults$j),
+                                        selected = unique(plotmipca::dataResults$j)[1],
                                         inline = TRUE
                                     ),
                                     shiny::radioButtons("lv",
                                         "Latent structure",
-                                        choices = rev(unique(dataResults$lv)),
+                                        choices = rev(unique(plotmipca::dataResults$lv)),
                                         selected = TRUE,
                                         inline = TRUE
                                     ),
                                     shiny::checkboxGroupInput("K",
                                         "Discrete levels",
                                         inline = TRUE,
-                                        choices = levels(dataResults$K),
-                                        selected = levels(dataResults$K)[c(1, 3, 5)]
+                                        choices = levels(plotmipca::dataResults$K),
+                                        selected = levels(plotmipca::dataResults$K)[c(1, 3, 5)]
                                     ),
                                     shiny::checkboxGroupInput("pj",
                                         "Proportion of noise variables",
                                         inline = TRUE,
-                                        choices = unique(dataResults$pj),
-                                        selected = unique(dataResults$pj)
+                                        choices = unique(plotmipca::dataResults$pj),
+                                        selected = unique(plotmipca::dataResults$pj)
                                     )
                                 ),
                                 shiny::tabPanel(
                                     title = "2. Missing data treatments",
                                     shiny::checkboxGroupInput("method",
                                         "Methods",
-                                        choices = levels(dataResults$method),
-                                        selected = levels(dataResults$method)[c(1, 3:5, 8)],
+                                        choices = levels(plotmipca::dataResults$method),
+                                        selected = levels(plotmipca::dataResults$method)[c(1, 3:5, 8)],
                                         inline = TRUE
                                     ),
                                     shinyWidgets::sliderTextInput(
                                         inputId = "npc",
                                         label = "Number of principal components (NPC)",
                                         hide_min_max = TRUE,
-                                        choices = sort(unique(dataResults$npc)),
+                                        choices = sort(unique(plotmipca::dataResults$npc)),
                                         selected = c(0, 10),
                                         grid = TRUE
                                     )
@@ -111,7 +111,7 @@ ui_call <- function() {
                                     title = "3. Simulation outcomes",
                                     shiny::selectInput("par",
                                         "Parameter",
-                                        choices = levels(dataResults$par),
+                                        choices = levels(plotmipca::dataResults$par),
                                         selected = "z1 correlation z2"
                                     ),
                                     shiny::radioButtons("plot_y_axis",
