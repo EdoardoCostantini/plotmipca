@@ -84,7 +84,7 @@ ui_call <- function() {
                                         selected = levels(plotmipca::dataResults$K)[c(1, 3, 5)]
                                     ),
                                     shiny::checkboxGroupInput("pn",
-                                        "Proportion of noise variables",
+                                        "Proportion of noise variables (pn)",
                                         inline = TRUE,
                                         choices = unique(plotmipca::dataResults$pn),
                                         selected = unique(plotmipca::dataResults$pn)
@@ -96,7 +96,7 @@ ui_call <- function() {
                                         "Methods",
                                         choices = levels(plotmipca::dataResults$method),
                                         selected = levels(plotmipca::dataResults$method)[c(1, 3:5, 8)],
-                                        inline = TRUE
+                                        inline = FALSE
                                     ),
                                     shinyWidgets::sliderTextInput(
                                         inputId = "npc",
@@ -112,7 +112,7 @@ ui_call <- function() {
                                     shiny::selectInput("par",
                                         "Parameter",
                                         choices = levels(plotmipca::dataResults$par),
-                                        selected = "z1 correlation z2"
+                                        selected = "x1 correlation x2"
                                     ),
                                     shiny::radioButtons("plot_y_axis",
                                         "Outcome measure",

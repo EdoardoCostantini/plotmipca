@@ -73,6 +73,7 @@ current_levels <- levels(ggshape$par)
 current_levels <- gsub("~1", " mean", current_levels)
 current_levels <- gsub("r", " correlation ", current_levels)
 current_levels <- gsub("~~", " covariance ", current_levels)
+current_levels <- gsub("z", "x", current_levels)
 levels(ggshape$par) <- current_levels
 
 # Rename data
