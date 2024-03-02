@@ -15,7 +15,7 @@
 #'   \item K. Discretization level (number of categories)
 #'   \item D. Proportion of discretized variables
 #'   \item interval. Whether data was discretized to interval or ordinal scale
-#'   \item pj. Proportion of junk variables
+#'   \item pn. Proportion of noise variables
 #'   \item lv. Presence of latent structure
 #'   \item par. Parameter of interest
 #'   \item npc. Number of pcs requested

@@ -51,6 +51,9 @@ levels(ggshape$method) <- methods_names$plot
 # Round pj
 ggshape$pj <- round(ggshape$pj, 2)
 
+# Rename pj into pn
+colnames(ggshape)[colnames(ggshape) == "pj"] <- "pn"
+
 # Make a different factor for labelling npcs
 ggshape$NPC <- ggshape[, "npc"]
 levels(ggshape$NPC) <- list(
@@ -64,11 +67,13 @@ ggshape$npc <- as.numeric(as.character(ggshape$npc))
 
 # Make Parameter names better
 current_levels <- levels(ggshape$par)
-
 current_levels <- gsub("~1", " mean", current_levels)
 current_levels <- gsub("r", " correlation ", current_levels)
 current_levels <- gsub("~~", " covariance ", current_levels)
 levels(ggshape$par) <- current_levels
+
+# Rename data
+dataResults <- ggshape
 
 # Use data in the package
 usethis::use_data(dataResults, overwrite = TRUE)

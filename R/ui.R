@@ -83,11 +83,11 @@ ui_call <- function() {
                                         choices = levels(plotmipca::dataResults$K),
                                         selected = levels(plotmipca::dataResults$K)[c(1, 3, 5)]
                                     ),
-                                    shiny::checkboxGroupInput("pj",
+                                    shiny::checkboxGroupInput("pn",
                                         "Proportion of noise variables",
                                         inline = TRUE,
-                                        choices = unique(plotmipca::dataResults$pj),
-                                        selected = unique(plotmipca::dataResults$pj)
+                                        choices = unique(plotmipca::dataResults$pn),
+                                        selected = unique(plotmipca::dataResults$pn)
                                     )
                                 ),
                                 shiny::tabPanel(

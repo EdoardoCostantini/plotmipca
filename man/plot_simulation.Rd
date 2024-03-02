@@ -48,7 +48,7 @@ latent_structure <- unique(dataResults$lv)[2]
 method_vector <- levels(dataResults$method)[c(1, 3:5)]
 npc_range <- c(0, 10)
 categories <- levels(dataResults$K)[c(1, 3, 5)]
-prop_noise <- unique(dataResults$pj)[c(1, 4)]
+prop_noise <- unique(dataResults$pn)[c(1, 4)]
 outcome <- c("bias", "CIC", "CIW", "mcsd")[1]
 
 # Use the function
@@ -60,7 +60,7 @@ plot_simulation(
     method_vector = levels(dataResults$method)[c(1, 3:5)],
     npc_range = c(0, 10),
     categories = levels(dataResults$K)[c(1, 3, 5)],
-    prop_noise = unique(dataResults$pj)[c(1, 4)],
+    prop_noise = unique(dataResults$pn)[c(1, 4)],
     outcome = c("bias", "CIC", "CIW", "mcsd")[1]
 )
 

@@ -33,7 +33,7 @@ server <- function(input, output, session) {
                 method_vector = input$method,
                 npc_range = input$npc,
                 categories = input$K,
-                prop_noise = input$pj,
+                prop_noise = input$pn,
                 outcome = input$plot_y_axis
             )
         }

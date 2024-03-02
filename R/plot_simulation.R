@@ -21,7 +21,7 @@
 #' method_vector <- levels(dataResults$method)[c(1, 3:5)]
 #' npc_range <- c(0, 10)
 #' categories <- levels(dataResults$K)[c(1, 3, 5)]
-#' prop_noise <- unique(dataResults$pj)[c(1, 4)]
+#' prop_noise <- unique(dataResults$pn)[c(1, 4)]
 #' outcome <- c("bias", "CIC", "CIW", "mcsd")[1]
 #'
 #' # Use the function
@@ -33,7 +33,7 @@
 #'     method_vector = levels(dataResults$method)[c(1, 3:5)],
 #'     npc_range = c(0, 10),
 #'     categories = levels(dataResults$K)[c(1, 3, 5)],
-#'     prop_noise = unique(dataResults$pj)[c(1, 4)],
+#'     prop_noise = unique(dataResults$pn)[c(1, 4)],
 #'     outcome = c("bias", "CIC", "CIW", "mcsd")[1]
 #' )
 #'
@@ -49,7 +49,7 @@ plot_simulation <- function(results, n_items, parameter, latent_structure, metho
             npc <= npc_range[2],
             npc >= npc_range[1],
             K %in% categories,
-            pj %in% prop_noise
+            pn %in% prop_noise
         )
 
     # Make NPCs a factors
@@ -75,7 +75,7 @@ plot_simulation <- function(results, n_items, parameter, latent_structure, metho
         ggplot2::scale_fill_manual(
             values = c(grDevices::gray.colors(2, start = 0.5, end = 0.8), "white")
         ) +
-        ggplot2::facet_grid(reformulate("method", "pj"),
+        ggplot2::facet_grid(reformulate("method", "pn"),
             labeller = ggplot2::labeller(
                 .rows = ggplot2::label_both, 
                 .cols = ggplot2::label_value
