@@ -93,7 +93,7 @@ plot_simulation <- function(results, n_items, parameter, latent_structure, metho
             panel.background = ggplot2::element_rect(fill = NA, color = "gray")
         ) +
         ggplot2::labs(
-            x = "K",
+            x = "Number of categories",
             y = outcome
         )
 }

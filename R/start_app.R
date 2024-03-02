@@ -7,7 +7,7 @@
 #'
 #' - Number of observed items
 #' - Presence of latent structure (if yes, 7 latent variables are used)
-#' - Discrete levels (number of categories for discretized items)
+#' - Number of categories (number of categories for discretized items)
 #' - Proportion of noise variables
 #' - Missing data treatments:
 #'

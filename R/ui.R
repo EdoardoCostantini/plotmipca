@@ -78,7 +78,7 @@ ui_call <- function() {
                                         inline = TRUE
                                     ),
                                     shiny::checkboxGroupInput("K",
-                                        "Discrete levels",
+                                        "Number of categories",
                                         inline = TRUE,
                                         choices = levels(plotmipca::dataResults$K),
                                         selected = levels(plotmipca::dataResults$K)[c(1, 3, 5)]

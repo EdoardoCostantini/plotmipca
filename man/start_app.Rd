@@ -17,7 +17,7 @@ The interface of the Shiny app allows you to change the values of the following 
 \itemize{
 \item Number of observed items
 \item Presence of latent structure (if yes, 7 latent variables are used)
-\item Discrete levels (number of categories for discretized items)
+\item Number of categories (number of categories for discretized items)
 \item Proportion of noise variables
 \item Missing data treatments:
 \itemize{
@@ -34,7 +34,7 @@ The interface of the Shiny app allows you to change the values of the following 
 \item Number of principal components
 \item Outcome measure:
 \itemize{
-\item (percent relative) PRB
+\item PRB (percent relative bias)
 \item CIC (confidence interval coverage)
 \item CIW (average confidence interval)
 \item mcsd (standard deviation of the estimate across the monte carlo simulations)
