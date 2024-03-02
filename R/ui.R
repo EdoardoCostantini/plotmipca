@@ -33,7 +33,7 @@ ui_call <- function() {
                             This Shiny app accompanies the paper:
                             <br>
                             <br>
-                            <a href='https://arxiv.org/abs/2206.15107'>Costantini, E., Lang, K. M., Sijtsma, K., & Reeskens, T. (2022). Solving the 'many variables' problem in MICE with principal component regression. <i>arXiv preprint arXiv:2206.15107</i>.</a>
+                            Costantini, E., Lang, K.M., Sijtsma, K., Reeskens, T. (2023). Solving the many-variables problem in MICE with principal component regression. <i>Behav Res</i>. <a href='https://doi.org/10.3758/s13428-023-02117-1'>https://doi.org/10.3758/s13428-023-02117-1</a>
                             <br>
                             <br>
                             With this app, the user can:
