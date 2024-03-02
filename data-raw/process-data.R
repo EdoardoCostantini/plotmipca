@@ -139,8 +139,8 @@ for (i in 1:length(mids_sim)) {
 names(mids_sim) <- gsub("MIMI", "MI-MI", names(mids_sim))
 names(mids_sim) <- gsub("MIOP", "MI-OP", names(mids_sim))
 names(mids_sim) <- gsub("MIOR", "MI-OR", names(mids_sim))
-names(mids_sim) <- gsub("aux", "MI-PCA-AUX", names(mids_sim))
-names(mids_sim) <- gsub("vbv", "MI-PCA-VBV", names(mids_sim))
+names(mids_sim) <- gsub("aux", "MI-PCR-AUX", names(mids_sim))
+names(mids_sim) <- gsub("vbv", "MI-PCR-VBV", names(mids_sim))
 
 # Use the data
 usethis::use_data(mids_sim, overwrite = TRUE)
@@ -206,9 +206,9 @@ for (i in 1:length(mids_case)) {
 
 # Replace names of methods in mids sim
 names(mids_case) <- gsub("expert", "Expert", names(mids_case))
-names(mids_case) <- gsub("si4auxall", "SI-PCA-ALL", names(mids_case))
-names(mids_case) <- gsub("pcraux", "MI-PCA-AUX", names(mids_case))
-names(mids_case) <- gsub("vbv", "MI-PCA-VBV", names(mids_case))
+names(mids_case) <- gsub("si4auxall", "SI-PCR-ALL", names(mids_case))
+names(mids_case) <- gsub("pcraux", "MI-PCR-AUX", names(mids_case))
+names(mids_case) <- gsub("vbv", "MI-PCR-VBV", names(mids_case))
 names(mids_case) <- gsub("deafult", "Default", names(mids_case))
 
 # Use data in the package

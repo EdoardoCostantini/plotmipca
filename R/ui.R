@@ -168,8 +168,8 @@ ui_call <- function() {
                             ),
                             shiny::selectInput("conv_sim_method",
                                 "Imputation method:",
-                                choices = c("MI-PCA-AUX", "MI-PCA-VBV", "MI-MI", "MI-OP", "MI-OR"),
-                                selected = "MI-PCA-AUX"
+                                choices = c("MI-PCR-AUX", "MI-PCR-VBV", "MI-MI", "MI-OP", "MI-OR"),
+                                selected = "MI-PCR-AUX"
                             ),
                             shinyWidgets::sliderTextInput(
                                 inputId = "conv_sim_iters",
@@ -202,8 +202,8 @@ ui_call <- function() {
                             ),
                             shiny::selectInput("conv_case_method",
                                 "Imputation method:",
-                                choices = c("MI-PCA-AUX", "MI-PCA-VBV", "SI-PCA-ALL", "Default", "Expert"),
-                                selected = "MI-PCA-AUX"
+                                choices = c("MI-PCR-AUX", "MI-PCR-VBV", "SI-PCR-ALL", "Default", "Expert"),
+                                selected = "MI-PCR-AUX"
                             ),
                             shinyWidgets::sliderTextInput(
                                 inputId = "conv_case_iters",
