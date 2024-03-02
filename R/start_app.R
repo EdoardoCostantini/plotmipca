@@ -24,7 +24,7 @@
 #' - Number of principal components
 #' - Outcome measure:
 #'
-#'      - (percent relative) bias
+#'      - PRB (percent relative bias)
 #'      - CIC (confidence interval coverage)
 #'      - CIW (average confidence interval)
 #'      - mcsd (standard deviation of the estimate across the monte carlo simulations)

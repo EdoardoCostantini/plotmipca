@@ -116,7 +116,7 @@ ui_call <- function() {
                                     ),
                                     shiny::radioButtons("plot_y_axis",
                                         "Outcome measure",
-                                        choices = c("bias", "CIC", "CIW", "mcsd"),
+                                        choices = c("PRB", "CIC", "CIW"),
                                         inline = TRUE
                                     )
                                 )

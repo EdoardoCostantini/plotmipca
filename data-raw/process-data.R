@@ -54,6 +54,9 @@ ggshape$pj <- round(ggshape$pj, 2)
 # Rename pj into pn
 colnames(ggshape)[colnames(ggshape) == "pj"] <- "pn"
 
+# Rename bias to PRB
+colnames(ggshape)[colnames(ggshape) == "bias"] <- "PRB"
+
 # Make a different factor for labelling npcs
 ggshape$NPC <- ggshape[, "npc"]
 levels(ggshape$NPC) <- list(

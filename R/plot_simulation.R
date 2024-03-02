@@ -22,7 +22,7 @@
 #' npc_range <- c(0, 10)
 #' categories <- levels(dataResults$K)[c(1, 3, 5)]
 #' prop_noise <- unique(dataResults$pn)[c(1, 4)]
-#' outcome <- c("bias", "CIC", "CIW", "mcsd")[1]
+#' outcome <- c("PRB", "CIC", "CIW", "mcsd")[1]
 #'
 #' # Use the function
 #' plot_simulation(
@@ -34,7 +34,7 @@
 #'     npc_range = c(0, 10),
 #'     categories = levels(dataResults$K)[c(1, 3, 5)],
 #'     prop_noise = unique(dataResults$pn)[c(1, 4)],
-#'     outcome = c("bias", "CIC", "CIW", "mcsd")[1]
+#'     outcome = c("PRB", "CIC", "CIW", "mcsd")[1]
 #' )
 #'
 #' @export

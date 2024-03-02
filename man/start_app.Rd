@@ -34,7 +34,7 @@ The interface of the Shiny app allows you to change the values of the following 
 \item Number of principal components
 \item Outcome measure:
 \itemize{
-\item (percent relative) bias
+\item (percent relative) PRB
 \item CIC (confidence interval coverage)
 \item CIW (average confidence interval)
 \item mcsd (standard deviation of the estimate across the monte carlo simulations)

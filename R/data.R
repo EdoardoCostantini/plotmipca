@@ -24,7 +24,7 @@
 #'   \item mcsd. Standard deviation of the statistic estimate over the Monte Carlo repetitions
 #'   \item PC_exp. Explained variance by the extracted PCs
 #'   \item ref. True value of the statistic
-#'   \item bias. Raw bias
+#'   \item PRB. Percentage relative nias
 #'   \item CIC. Confidence interval coverage
 #'   \item CIW. Average confidence interval width
 #'   \item CIW_sd. Standard deviation of the confidence interval width
